@@ -198,6 +198,8 @@ void SRT() {
 //*************************************************************
 void "PROCEDURE FOR OPTION #5"() {
 	// free the schedule table if not NULL 
+	if(table != NULL)
+	free(table);
 	return;
 }
 
