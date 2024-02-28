@@ -74,13 +74,18 @@ void FIFO() {
 		for(int i=0;i<n;i++){
 		    
 		    if(table[i].done ==0){
-		        if(table[i].arrival<earliest_time) 
+		        if(table[i].arrival<earliest_time) {
+					earliest_time = ..;
+					min_index = ...;
+				}
 		        
 		    }
 		}
 		 
 				
-		// set start time, end time, turnaround time, done fields for unscheduled process with earliest arrival time        	
+		// set start time, end time, turnaround time, done fields for unscheduled process with earliest arrival time   
+		table[min_index].start_time  = max(table[min_index].arrival,current_cycle);
+		table[min_index].end_time=    table[min_index].start_time;  	
 		// update current cycle time and increment number of processes scheduled 
 		
 		
@@ -93,14 +98,40 @@ void FIFO() {
 
 //*************************************************************
 void "PROCEDURE FOR OPTION #3"() {
-	// declare (and initilize when appropriate) local variables 
+	// declare (and initilize when appropriate) local variables
+	int lowest_cycle;
+	int current_cycle=0; 
 	// for each process, reset "done" field to 0 
 	// while there are still processes to schedule 	
+	...
 		// initilize the lowest total cycle time to INT_MAX (largest integer value) 
+		lowest_cycle = INT_MAX;
+		at_least_one = 0;
+
 		// for each process not yet scheduled 
-			// check if process has lower total cycle time than current lowest and has arrival time less than current cycle time and update 	
-		// set start time, end time, turnaround time, done fields for unscheduled process with lowest (and available) total cycle time        	
-		// update current cycle time and increment number of processes scheduled 
+		
+			// check if process has lower total cycle time than current lowest and has arrival time less than current cycle time and update 
+			if((table[i].total_cpu<lowest_cycle)&&(table[i].arrival<= current_cycle))	{
+				lowest_cycle = ..;
+				min_index = ...;
+				at_least_one = 1;
+			}
+
+
+
+		// set start time, end time, turnaround time, done fields for unscheduled process with lowest (and available) total cycle time
+		if(at_least_one==1){
+			table[min.index].start_time = max(time[min_index].arrival,current_cycle);
+			table[min_index].end_time = ...;
+			table[min_index].turnaround_time = ...;
+			// update current cycle time and increment number of processes scheduled 
+			current_cycle++;
+			table[min_index].done =1;
+		}   
+		else{
+			current_cycle++;
+		}     	
+		
 	// print contents of table 
 	return;		
 }	
@@ -141,4 +172,3 @@ int main() {
 	} // while loop 
 	 return 1; // indicates success 
 } // end of procedure 
-Displaying comp322_asmt2_skeleton_s24.txt.
