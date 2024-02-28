@@ -97,7 +97,7 @@ void FIFO() {
 
 
 //*************************************************************
-void "PROCEDURE FOR OPTION #3"() {
+void SJF() {
 	// declare (and initilize when appropriate) local variables
 	int lowest_cycle;
 	int current_cycle=0; 
@@ -131,25 +131,65 @@ void "PROCEDURE FOR OPTION #3"() {
 		else{
 			current_cycle++;
 		}     	
-		
+	// while ends here	
 	// print contents of table 
 	return;		
 }	
         	
 
 //*************************************************************
-void "PROCEDURE FOR OPTION #4"() {
-	// declare (and initilize when appropriate) local variables 
-	// for each process, reset "done", "total_remaining" and "already_started" fields to 0 
+void SRT() {
+	// declare (and initilize when appropriate) local variables
+	int lowest_remaining;
+	int current_cycle=0; 
+
+
+	for(int i=0;..){
+		table[i].done = 0;
+		table[i].already_started = 0;
+		table[i].total_remaining = table[i].total_cpu;
+		
+	}
+	// for each process, reset "done" field to 0 
 	// while there are still processes to schedule 	
-		// initilize the lowest total remaining time to INT_MAX (largest integer value) 
+	...
+		// initilize the lowest total cycle time to INT_MAX (largest integer value) 
+		lowest_remaining = INT_MAX;
+		at_least_one = 0;
+
 		// for each process not yet scheduled 
-			// check if process has lower total remaining time than current lowest and has arrival time less than current cycle time and update 	
-		// check if process already partially-scheduled 
-			// if so, set "start time", "already_started" fields of process with lowest (and available) total remaining cycle time        	
-		// set end time, turnaround time of process with lowest (and available) total remaining cycle time 
-		// decrement total remaining time of process with lowest (and available) total remaining cycle time 
-		// if remaining time is 0, set done field to 1, increment cycle time and number of scheduled processes
+		
+			// check if process has lower total cycle time than current lowest and has arrival time less than current cycle time and update 
+			if((table[i].total_remaining < lowest_remaining)&&(table[i].arrival<= current_cycle))	{
+				lowest_remaining = ..;
+				min_index = ...;
+				at_least_one = 1;
+			}
+
+
+
+		// set start time, end time, turnaround time, done fields for unscheduled process with lowest (and available) total cycle time
+		if(at_least_one==1){
+			if(table[min_index].already_started ==0){
+				table[min.index].start_time = max(time[min_index].arrival,current_cycle);
+				table[min_index].already_started =1;
+			}
+			
+			table[min_index].end_time = current_cycle+1;
+			table[min_index].turnaround_time = table[min_index].end_time-table[min_index].arrival;
+			table[min_index].total_remaining--;
+			// update current cycle time and increment number of processes scheduled 
+			if(table[min_index].total_remaining ==0){
+				table[min_index].done =1;
+				num_done++;
+
+			}
+			current_cycle++;
+			table[min_index].done =1;
+		}   
+			current_cycle++;
+		     	
+		
 	// print contents of table 
 	return;		
 }	
