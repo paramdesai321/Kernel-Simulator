@@ -65,6 +65,7 @@ void FIFO() {
 	int num_done=0;
 	int earliest_time;
 	int min_index;
+	int current_cycle=0;
 	// for each process, reset "done" field to 0 
 
 	// while there are still processes to schedule 	
@@ -80,14 +81,14 @@ void FIFO() {
 					earliest_time = table[i].arrival;
 					min_index = i;
 				}
-		        
+		        current_cycle = 0;
 		    }
 		}
 		 
 				
 		// set start time, end time, turnaround time, done fields for unscheduled process with earliest arrival time   
 		table[min_index].start_time=max(table[min_index].arrival,current_cycle);
-		table[min_index].end_time=    table[min_index].start_time;  	
+		table[min_index].end_time=table[min_index].start_time;  	
 		// update current cycle time and increment number of processes scheduled 
 		
 		
