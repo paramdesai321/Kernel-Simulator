@@ -157,9 +157,10 @@ void SRT() {
 	int lowest_remaining;
 	int current_cycle=0; 
 	int min_index;
+	int at_least_one;
 	int num_done = 0;
 
-	for(int i=0;..){
+	for(int i=0;i<n;i++){
 		table[i].done = 0;
 		table[i].already_started = 0;
 		table[i].total_remaining = table[i].total_cpu;
@@ -167,13 +168,13 @@ void SRT() {
 	}
 	// for each process, reset "done" field to 0 
 	// while there are still processes to schedule 	
-	...
+	while(num_done<n){
 		// initilize the lowest total cycle time to INT_MAX (largest integer value) 
 		lowest_remaining = INT_MAX;
 		at_least_one = 0;
 
 		// for each process not yet scheduled 
-		
+		for(int i=0;i<n;i++){
 			// check if process has lower total cycle time than current lowest and has arrival time less than current cycle time and update 
 			if((table[i].total_remaining < lowest_remaining)&&(table[i].arrival<= current_cycle))	{
 				lowest_remaining = table[i].total_remaining;
@@ -181,12 +182,12 @@ void SRT() {
 				at_least_one = 1;
 			}
 
-
+		}
 
 		// set start time, end time, turnaround time, done fields for unscheduled process with lowest (and available) total cycle time
 		if(at_least_one==1){
 			if(table[min_index].already_started ==0){
-				table[min_index].start_time = max(time[min_index].arrival,current_cycle);
+				table[min_index].start_time = max(table[min_index].arrival,current_cycle);
 				table[min_index].already_started =1;
 			}
 			
@@ -204,7 +205,7 @@ void SRT() {
 		}   
 			
 		     	
-		
+	}	
 	// print contents of table 
 	return;		
 }	
