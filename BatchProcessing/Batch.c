@@ -19,7 +19,7 @@ struct node{
 }*table=NULL;
 
 typedef struct node table_type;
-int n;
+int n; // total number of processes
 
 // optional: define a function that finds the maximum of two integers
 #define max(a,b) (a>b ? a : b)
@@ -55,21 +55,18 @@ void parameters() {
 	    
 	    table[i].id=i;
 	}
-	    
-	}
-			
-	// print contents of table 
-	return;		
-}	
-		
+	  // print contents of table 
+	return;	  
+}
 
 //*************************************************************
 void FIFO() {
 	// declare (and initilize when appropriate) local variables 
 	int num_done=0;
 	int earliest_time;
+	int min_index;
 	// for each process, reset "done" field to 0 
-	for(int i=0;i<)
+
 	// while there are still processes to schedule 	
 	while(num_done < n){
 		// initilize the earliest arrival time to INT_MAX (largest integer value) 
@@ -80,8 +77,8 @@ void FIFO() {
 		    
 		    if(table[i].done ==0){
 		        if(table[i].arrival<earliest_time) {
-					earliest_time = ..;
-					min_index = ...;
+					earliest_time = table[i].arrival;
+					min_index = i;
 				}
 		        
 		    }
@@ -89,7 +86,7 @@ void FIFO() {
 		 
 				
 		// set start time, end time, turnaround time, done fields for unscheduled process with earliest arrival time   
-		table[min_index].start_time  = max(table[min_index].arrival,current_cycle);
+		table[min_index].start_time=max(table[min_index].arrival,current_cycle);
 		table[min_index].end_time=    table[min_index].start_time;  	
 		// update current cycle time and increment number of processes scheduled 
 		
@@ -106,23 +103,25 @@ void SJF() {
 	// declare (and initilize when appropriate) local variables
 	int lowest_cycle;
 	int current_cycle=0; 
+	int at_least_one;
+	int num_done=0;
 	// for each process, reset "done" field to 0 
 	// while there are still processes to schedule 	
-	...
+	while(num_done<0){
 		// initilize the lowest total cycle time to INT_MAX (largest integer value) 
 		lowest_cycle = INT_MAX;
 		at_least_one = 0;
 
 		// for each process not yet scheduled 
-		
+			for(int i=0;i<n;i++){}
 			// check if process has lower total cycle time than current lowest and has arrival time less than current cycle time and update 
 			if((table[i].total_cpu<lowest_cycle)&&(table[i].arrival<= current_cycle))	{
-				lowest_cycle = ..;
-				min_index = ...;
+				lowest_cycle = table[i].total_cpu;
+				min_index = i;
 				at_least_one = 1;
 			}
 
-
+	}
 
 		// set start time, end time, turnaround time, done fields for unscheduled process with lowest (and available) total cycle time
 		if(at_least_one==1){
@@ -135,7 +134,8 @@ void SJF() {
 		}   
 		else{
 			current_cycle++;
-		}     	
+		}    
+	} 	
 	// while ends here	
 	// print contents of table 
 	return;		
