@@ -9,6 +9,12 @@
 struct node{
     int id;
     int arrival;
+	int total_cpu;
+	int total_remaining;
+	int done; // flag to indicate whether the process has been finished or not
+	int start_time; 
+	int end_time;
+	int turnaround_time;
     
 }*table=NULL;
 
@@ -207,10 +213,20 @@ void "PROCEDURE FOR OPTION #5"() {
 //*************************************************************
 int main() {
 	// declare local vars 
+	int choice;
 	// while user has not chosen to quit 
 		// print menu of options 
+
+		printf("1.Enter Parameters");
+		printf("2.Schedule Processes with FIFO Algorithm");
+		printf("3.Schedule Processes with SJF Algorithm");
+		printf("4.Schedule Processes with SRT Algorithm");
+		printf("Quit Program and free memory");
+
 		// prompt for menu selection 
+		printf("Choose: ");
+		scanf()
 		// call appropriate procedure based on choice--use switch statement or series of if, else if, else statements 	
 	} // while loop 
 	 return 1; // indicates success 
-} // end of procedure 
+// end of procedure 
