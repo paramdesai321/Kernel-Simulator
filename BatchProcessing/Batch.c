@@ -18,7 +18,7 @@ struct node{
     
 }*table=NULL;
 
-typedef struct node table_typle;
+typedef struct node table_type;
 int n;
 
 // optional: define a function that finds the maximum of two integers
@@ -36,23 +36,22 @@ void printBatch() {
 
 
 //*************************************************************
-void "PROCEDURE FOR OPTION #1"() {
+void parameters() {
 	// declare local variables 
 	
 	// prompt for total number of processes 
 	printf("Enter the number of processes:");
-	scanf("%d",&n)
+	scanf("%d",&n);
 	// allocate memory for table to hold process parameters 
-	table = (table_typle*)()malloc(n*sizeof(table_typle));
+	table = (table_type*)malloc(n*sizeof(table_type));
 	// for each auto-numbered process (starting from 0): 
 	for(int i=0;i<n;i++){
 	    // prompt for arrival time, and total cycle time 
 	    printf("Enter arrival for process %d: ",i);
 	    scanf("%d",&table[i].arrival);
-	    printf("Enter total cycle time %d:",i);
-	    scanf("%d",&table[i].total);
-	    // same thing for other fields
-	    
+	    printf("Enter total cycles for the process %d:",i);
+	    scanf("%d",&table[i].total_cpu);
+	    // same thing for other fields   
 	    
 	    table[i].id=i;
 	}
