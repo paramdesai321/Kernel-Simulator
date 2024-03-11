@@ -21,6 +21,7 @@ struct node{
 
 typedef struct node table_type;
 int n; // total number of processes
+int quit=0;
 
 // optional: define a function that finds the maximum of two integers
 #define max(a,b) (a>b ? a : b)
@@ -246,8 +247,10 @@ void SRT() {
 //*************************************************************
 void free() {
 	// free the schedule table if not NULL 
-	if(table != NULL)
+	if(table != NULL){
 	free(table);	
+	}
+	quit=1;
 	return;
 }
 
