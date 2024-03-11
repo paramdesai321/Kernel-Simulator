@@ -265,12 +265,12 @@ int main() {
 		printf("1.Enter Parameters\n");
 		printf("2.Schedule Processes with FIFO Algorithm\n");
 		printf("3.Schedule Processes with SJF Algorithm\n");
-		printf("4.Schedule Processes with SRT Algorithm"\n);
+		printf("4.Schedule Processes with SRT Algorithm\n");
 		printf("Quit Program and free memory\n");
 
 		// prompt for menu selection 
-		printf("Choose: "):
-		scanf('%d',&choice);
+		printf("Choose: ");
+		scanf("%d",&choice);
 
 		switch(choice){
 			case 1: 
@@ -282,5 +282,4 @@ int main() {
 		return 1;
 		// call appropriate procedure based on choice--use switch statement or series of if, else if, else statements 	
 	} // while loop 
-	  // indicates success 
-// end of procedure 
+	  // indicates succes\ns// end of procedur\ne
