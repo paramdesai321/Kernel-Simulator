@@ -31,31 +31,34 @@ void printBatch() {
 	// print table header 	
 	// for each process 
 		// print the contents (id, arrival time, total_cycles) of each field of the table's index 
-		 printf("i  Parent  First  Older  Younger\n");
+		 printf("PID  Arrival  Total  Start	End		Turnaround\n");
     printf("-----------------------------------\n");
 
     for (int i = 0; i < n; i++) {
         printf("%-2d ", i);
         
-        if (pcb[i].parent != -1)
-            printf("%-7d ", pcb[i].parent);
-        else
-            printf("        ");
+        
+            printf("%-7d ",i);
+   
+            
 
-        if (pcb[i].child != -1)
-            printf("%-6d ", pcb[i].child);
-        else
-            printf("      ");
+       
+            printf("%-6d ",table[i].arrival);
+      
 
-        if (pcb[i].older_sibling != -1)
-            printf("%-6d ", pcb[i].older_sibling);
-        else
-            printf("      ");
+        
+            printf("%-6d ",table[i].total_cpu);
+       
 
-        if (pcb[i].younger_sibling != -1)
-            printf("%-6d ", pcb[i].younger_sibling);
-        else
-            printf("      ");
+       
+            printf("%-6d ",table[i].start_time);
+
+			
+
+			 printf("%-6d ",table[i].end_time);
+
+			  printf("%-6d ",table[i].turnaround_time);
+     
         
         printf("\n");
     }
@@ -256,11 +259,11 @@ int main() {
 	// while user has not chosen to quit 
 		// print menu of options 
 
-		printf("1.Enter Parameters");
-		printf("2.Schedule Processes with FIFO Algorithm");
-		printf("3.Schedule Processes with SJF Algorithm");
-		printf("4.Schedule Processes with SRT Algorithm");
-		printf("Quit Program and free memory");
+		printf("1.Enter Parameters\n");
+		printf("2.Schedule Processes with FIFO Algorithm\n");
+		printf("3.Schedule Processes with SJF Algorithm\n");
+		printf("4.Schedule Processes with SRT Algorithm"\n);
+		printf("Quit Program and free memory\n");
 
 		// prompt for menu selection 
 		printf("Choose: ");
