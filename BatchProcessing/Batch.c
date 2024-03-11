@@ -266,8 +266,16 @@ int main() {
 		printf("Quit Program and free memory\n");
 
 		// prompt for menu selection 
-		printf("Choose: ");
-		scanf()
+		printf("Choose: "):
+		scanf('%d',&choice);
+
+		switch(choice){
+			case 1: 
+				parameters();
+			default:
+				printf("Invalid Input\n");
+				main();
+		}
 		// call appropriate procedure based on choice--use switch statement or series of if, else if, else statements 	
 	} // while loop 
 	 return 1; // indicates success 
