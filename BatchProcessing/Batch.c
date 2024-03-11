@@ -133,6 +133,7 @@ void FIFO() {
 		
 	}
 	// print contents of table 
+	printBatch();
 	return;		
 }	
 
@@ -275,6 +276,8 @@ int main() {
 		switch(choice){
 			case 1: 
 				parameters();
+			case 2:
+			    FIFO();
 			default:
 				printf("Invalid Input\n");
 				main();
