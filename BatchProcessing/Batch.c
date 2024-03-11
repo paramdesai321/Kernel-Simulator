@@ -31,6 +31,35 @@ void printBatch() {
 	// print table header 	
 	// for each process 
 		// print the contents (id, arrival time, total_cycles) of each field of the table's index 
+		 printf("i  Parent  First  Older  Younger\n");
+    printf("-----------------------------------\n");
+
+    for (int i = 0; i < n; i++) {
+        printf("%-2d ", i);
+        
+        if (pcb[i].parent != -1)
+            printf("%-7d ", pcb[i].parent);
+        else
+            printf("        ");
+
+        if (pcb[i].child != -1)
+            printf("%-6d ", pcb[i].child);
+        else
+            printf("      ");
+
+        if (pcb[i].older_sibling != -1)
+            printf("%-6d ", pcb[i].older_sibling);
+        else
+            printf("      ");
+
+        if (pcb[i].younger_sibling != -1)
+            printf("%-6d ", pcb[i].younger_sibling);
+        else
+            printf("      ");
+        
+        printf("\n");
+    }
+    printf("-----------------------------------\n");
 		// if process has been scheduled ("done" field is 1, print other contents (start time, end time, turnaround time) 
 	return;
 }
