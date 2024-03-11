@@ -245,7 +245,7 @@ void SRT() {
         	
 
 //*************************************************************
-void free() {
+void memoryfree() {
 	// free the schedule table if not NULL 
 	if(table != NULL){
 	free(table);	
@@ -279,7 +279,8 @@ int main() {
 				printf("Invalid Input\n");
 				main();
 		}
+		return 1;
 		// call appropriate procedure based on choice--use switch statement or series of if, else if, else statements 	
 	} // while loop 
-	 return 1; // indicates success 
+	  // indicates success 
 // end of procedure 
