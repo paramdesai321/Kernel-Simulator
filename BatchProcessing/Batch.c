@@ -28,45 +28,22 @@ int quit=0;
 
 //***************************************************************
 void printBatch() {
-	// declare local variables
-	// print table header 	
-	// for each process 
-		// print the contents (id, arrival time, total_cycles) of each field of the table's index 
-		 printf("PID  Arrival  Total  Start	End		Turnaround\n");
-    printf("-----------------------------------\n");
+    // Print table header
+    printf("%-5s%-10s%-10s%-10s%-10s%-10s\n", "PID", "Arrival", "Total", "Start", "End", "Turnaround");
+    printf("-----------------------------------------\n");
 
     for (int i = 0; i < n; i++) {
-        printf("%-2d ", i);
-        
-        
-            printf("%-7d ",i);
-   
-            
-
-       
-            printf("%-6d ",table[i].arrival);
-      
-
-        
-            printf("%-6d ",table[i].total_cpu);
-       
-
-       
-            printf("%-6d ",table[i].start_time);
-
-			
-
-			 printf("%-6d ",table[i].end_time);
-
-			  printf("%-6d ",table[i].turnaround_time);
-     
-        
-        printf("\n");
+        printf("%-5d%-10d%-10d%-10d%-10d%-10d\n",
+               table[i].id,
+               table[i].arrival,
+               table[i].total_cpu,
+               table[i].start_time,
+               table[i].end_time,
+               table[i].turnaround_time);
     }
-    printf("-----------------------------------\n");
-		// if process has been scheduled ("done" field is 1, print other contents (start time, end time, turnaround time) 
-	return;
+    printf("-----------------------------------------\n");
 }
+
 
 
 //*************************************************************
