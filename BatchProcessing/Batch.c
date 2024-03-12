@@ -125,7 +125,7 @@ void SJF() {
 	int num_done=0;
 	// for each process, reset "done" field to 0 
 	// while there are still processes to schedule 	
-	while(num_done<0){
+	while(num_done<n){
 		// initilize the lowest total cycle time to INT_MAX (largest integer value) 
 		lowest_cycle = INT_MAX;
 		at_least_one = 0;
@@ -144,6 +144,7 @@ void SJF() {
 		// set start time, end time, turnaround time, done fields for unscheduled process with lowest (and available) total cycle time
 		if(at_least_one==1){
 			table[min_index].start_time=max(table[min_index].arrival,current_cycle);
+			//printf('%d',table[min_index].start_time);
 		table[min_index].end_time=table[min_index].start_time+table[min_index].total_cpu;  	
 		table[min_index].turnaround_time = table[min_index].end_time - table[min_index].arrival; 
 			// update current cycle time and increment number of processes scheduled 
