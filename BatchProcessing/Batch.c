@@ -158,6 +158,7 @@ void SJF() {
 	} 	
 	// while ends here	
 	// print contents of table 
+	printBatch();
 	return;		
 }	
         	
@@ -218,6 +219,7 @@ void SRT() {
 		     	
 	}	
 	// print contents of table 
+	printBatch();
 	return;		
 }	
         	
@@ -239,7 +241,7 @@ int main() {
 	int choice;
 	// while user has not chosen to quit 
 		// print menu of options 
-
+	
 		printf("1.Enter Parameters\n");
 		printf("2.Schedule Processes with FIFO Algorithm\n");
 		printf("3.Schedule Processes with SJF Algorithm\n");
@@ -253,8 +255,15 @@ int main() {
 		switch(choice){
 			case 1: 
 				parameters();
+				break;
 			case 2:
 			    FIFO();
+			case 3: 
+			    SJF();
+			case 4:
+			    SRT();
+			case 5:
+			    memoryfree();
 			default:
 				printf("Invalid Input\n");
 				main();
