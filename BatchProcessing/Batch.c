@@ -241,6 +241,7 @@ int main() {
 	int choice;
 	// while user has not chosen to quit 
 		// print menu of options 
+		while(quit==0){
 	
 		printf("1.Enter Parameters\n");
 		printf("2.Schedule Processes with FIFO Algorithm\n");
@@ -252,21 +253,28 @@ int main() {
 		printf("Choose: ");
 		scanf("%d",&choice);
 
+
 		switch(choice){
 			case 1: 
 				parameters();
 				break;
 			case 2:
 			    FIFO();
+				break;
 			case 3: 
 			    SJF();
+				break;
 			case 4:
 			    SRT();
+				break;
 			case 5:
 			    memoryfree();
+				break;
 			default:
 				printf("Invalid Input\n");
 				main();
+		}
+
 		}
 		return 1;
 		// call appropriate procedure based on choice--use switch statement or series of if, else if, else statements 	
