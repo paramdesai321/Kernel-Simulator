@@ -1,242 +1,287 @@
+
 #include <stdio.h>
 #include <stdlib.h>
+#include <limits.h>
 
-// Define structures and global variables
+// declare global variables including a table structure to hold scheduling information
+
 
 struct node{
-    int parent;
-    int child;
-	int older_sibling;
-	int younger_sibling;
-};
+    int id;
+    int arrival;
+	int total_cpu;
+	int total_remaining;
+	int done; // flag to indicate whether the process has been finished or not
+	int start_time; 
+	int end_time;
+	int turnaround_time;
+	int already_started;
+    
+}*table=NULL;
 
-typedef struct node  pcb_type;
-int n;
-
-pcb_type *pcb;
+typedef struct node table_type;
+int n; // total number of processes
 int quit=0;
 
+// optional: define a function that finds the maximum of two integers
+#define max(a,b) (a>b ? a : b)
 
-
-void printPCBTable() {
-    printf("i  Parent  First  Older  Younger\n");
-    printf("-----------------------------------\n");
+//***************************************************************
+void printBatch() {
+    // Print table header
+    printf("%-5s%-10s%-10s%-10s%-10s%-10s\n", "PID", "Arrival", "Total", "Start", "End", "Turnaround");
+    printf("-----------------------------------------\n");
 
     for (int i = 0; i < n; i++) {
-        printf("%-2d ", i);
-        
-        if (pcb[i].parent != -1)
-            printf("%-7d ", pcb[i].parent);
-        else
-            printf("        ");
-
-        if (pcb[i].child != -1)
-            printf("%-6d ", pcb[i].child);
-        else
-            printf("      ");
-
-        if (pcb[i].older_sibling != -1)
-            printf("%-6d ", pcb[i].older_sibling);
-        else
-            printf("      ");
-
-        if (pcb[i].younger_sibling != -1)
-            printf("%-6d ", pcb[i].younger_sibling);
-        else
-            printf("      ");
-        
-        printf("\n");
+        printf("%-5d%-10d%-10d%-10d%-10d%-10d\n",
+               table[i].id,
+               table[i].arrival,
+               table[i].total_cpu,
+               table[i].start_time,
+               table[i].end_time,
+               table[i].turnaround_time);
     }
-    printf("-----------------------------------\n");
+    printf("-----------------------------------------\n");
 }
 
 
 
-void option1() {
-
-	// Declare local variables 
+//*************************************************************
+void parameters() {
+	// declare local variables 
 	
-	int parent = 0;
-	int child = 0;
-	// Prompt for maximum number of processes
-	printf("The maximum of number of processes: ");
+	// prompt for total number of processes 
+	printf("Enter the number of processes:");
 	scanf("%d",&n);
-
-	// Allocate memmory for dynamic array of PCB's 
-	pcb = (pcb_type*)malloc(n*sizeof(pcb_type));
-
-	// Initialize fields of PCB[0] 
-	pcb[0].parent = 0;
-	pcb[0].child = -1;
-
-  
-	// Intitialize all other PCBs' parent, first_child, younger_sibling, older_sibling 
-	for(int i=1;i<n;i++){
-		pcb[i].parent = -1;
-		pcb[i].child = -1;
-		pcb[i].older_sibling=-1;
-		pcb[i].younger_sibling=-1;
+	// allocate memory for table to hold process parameters 
+	table = (table_type*)malloc(n*sizeof(table_type));
+	// for each auto-numbered process (starting from 0): 
+	for(int i=0;i<n;i++){
+	    // prompt for arrival time, and total cycle time 
+	    printf("Enter arrival for process %d: ",i);
+	    scanf("%d",&table[i].arrival);
+	    printf("Enter total cycles for the process %d:",i);
+	    scanf("%d",&table[i].total_cpu);
+	    // same thing for other fields   
+	    
+	    table[i].id=i;
 	}
-	// Print PCB table 	
-	printf("i Parent First Older Younger\n");
-	printf("--------------------------------\n");
-	printf("0   0\n");
-  return;
+	  // print contents of table 
+	  printBatch();
+	return;	  
 }
 
-
-void option2() {
-  
-	// Declare local variables 
-	int parent=0;
-	int child=1;
-	// Prompt for the parent PCB index 
-	printf("Enter the parent process index: ");
-	scanf("%d",&parent);
-	
-	// Search for the next unused PCB index q 
-	while(pcb[child].parent !=-1){
-
-		child++;
-
+//*************************************************************
+void FIFO() {
+	// declare (and initilize when appropriate) local variables 
+	int num_done=0;
+	int earliest_time;
+	int min_index;
+	int current_cycle=0;
+	// for each process, reset "done" field to 0 
+	for(int i=0;i<n;i++){
+		table[i].done=0;
 	}
-  
-	// Record the parent PCB index p in PCB[q] 
-	pcb[child].parent = parent;
-	pcb[parent].younger_sibling=-1;
-	pcb[parent].older_sibling = -1;
-
-	// Initialize the first_child & younger_sibling of PCB[q] 
-	pcb[child].younger_sibling = -1;
-	pcb[child].child = -1;
-
-
-	// Check if parent PCB has no first child--if so, set fields appropriately 
 	
-	if(pcb[parent].child ==-1){
-		pcb[parent].child = child;
-	}	
-	else{
-
-		int current = pcb[parent].child;
-		while(pcb[current].younger_sibling!=-1){
-			current = pcb[current].younger_sibling;
+	// while there are still processes to schedule 	
+	while(num_done < n){
+	    
+		// initilize the earliest arrival time to INT_MAX (largest integer value) 
+		earliest_time = INT_MAX;
+		// for each process not yet scheduled
+		// check if process has earlier arrival time than current earliest and update 
+		for(int i=0;i<n;i++){
+		    
+		    if(table[i].done ==0){
+		        if(table[i].arrival<earliest_time) {
+					earliest_time = table[i].arrival;
+					
+					min_index = i;
+				//	printf("%d",min_index);
+				
+				}
+		        
+		    }
+			
 		}
-
-		pcb[current].younger_sibling = child;
-	//	printf("Y.S %d",pcb[current].younger_sibling);
-		pcb[child].older_sibling = current;
+		 
+				
+		// set start time, end time, turnaround time, done fields for unscheduled process with earliest arrival time   
+		table[min_index].start_time=max(table[min_index].arrival,current_cycle);
+		table[min_index].end_time=table[min_index].start_time+table[min_index].total_cpu;  	
+		table[min_index].turnaround_time = table[min_index].end_time - table[min_index].arrival; 
+		// update current cycle time and increment number of processes scheduled 
+		current_cycle = table[min_index].end_time;
+		num_done++;
+		table[min_index].done =1;
+		
 		
 	}
-	// Else, search for appropriate available spot for next child, set fields appropriately 
-   
-	// Print PCB table 
-	printPCBTable();
-  return;
-}
+	// print contents of table 
+	printBatch();
+	return;		
+}	
+
 
 //*************************************************************
-void destroy_descendants(int q) {
-
-	// If the formal parameter is -1, return  
-	if(q==-1){
-		return ;
-	}
-	
-	// Else:
-	else{
-
-		destroy_descendants(pcb[q].younger_sibling);
-
-		destroy_descendants(pcb[q].child);
-
-
-		pcb[q].child =-1;
-		pcb[q].parent =-1;
-		pcb[q].younger_sibling =-1;
-		pcb[q].older_sibling = -1;
+void SJF() {
+    int current_cycle = 0;
+    int num_done = 0;
+	 int min_index;
+        int at_least_one;
+		 int lowest_cycle = INT_MAX;
+    
+	for(int i=0;i<n;i++){
+		table[i].done=0;
 	}
 
-		// Call this procedure on the current PCB's younger sibling
+    while (num_done < n) {
+        //printf("num done: %d \n",num_done);
+         lowest_cycle = INT_MAX;
 
-		// Call this procedure on the current PCB's first child
+         at_least_one = 0;
 
-		// Set all fields to invalid 
+        for (int i = 0; i < n; i++) {
+			if(table[i].done ==0){
+            if ( (table[i].arrival <= current_cycle) && table[i].total_cpu < lowest_cycle) {
+                lowest_cycle = table[i].total_cpu;
+                min_index = i;
+                at_least_one = 1;
+				
+				
+            }
+			}
+        }
+
+        if (at_least_one == 1) {
+            
+            table[min_index].start_time = max(table[min_index].arrival, current_cycle);
+
+           
+            table[min_index].end_time = table[min_index].start_time + table[min_index].total_cpu;
+
 	
-  return;
+            table[min_index].turnaround_time = table[min_index].end_time - table[min_index].arrival;
+
+            
+            table[min_index].done = 1;
+            num_done++;
+
+            current_cycle = table[min_index].end_time;
+			printf("Cycle: %d\n",current_cycle);
+        } else {
+            // If no process is available, move to the next cycle
+            current_cycle++;
+        }
+    }
+
+    // Print contents of the table 
+    printBatch();
+    return;
 }
 
 //*************************************************************
-void option3() {
-  
-	// Declare local variables 
-	
-	int p;
-	int q;
-	// Prompt for the parent PCB index p
-	printf("Enter to Parent to destory child processes: ");
-	scanf("%d",&p);
-	
+void SRT() {
+    int lowest_remaining;
+    int current_cycle = 0;
+    int min_index;
+    int at_least_one;
+    int num_done = 0;
 
-	destroy_descendants(pcb[p].child);
+    // Initialize process fields
+    for (int i = 0; i < n; i++) {
+        table[i].done = 0;
+        table[i].already_started = 0;
+        table[i].total_remaining = table[i].total_cpu;
+    }
 
-	pcb[p].child = -1;
-	// Call recursive procedure on PCB[p]'s first child 
-	
+    while (num_done < n) {
+        lowest_remaining = INT_MAX;
+        at_least_one = 0;
 
-	// Set PCB[p]'s first child to invalid 
-	
-	// Print PCB table 
-	printPCBTable();
-  return;
+        for (int i = 0; i < n; i++) {
+            if (!table[i].done && table[i].arrival <= current_cycle && table[i].total_remaining < lowest_remaining) {
+                lowest_remaining = table[i].total_remaining;
+                min_index = i;
+                at_least_one = 1;
+            }
+        }
+
+        if (at_least_one==1) {
+            if (table[min_index].already_started == 0) {
+                table[min_index].start_time = current_cycle;
+                table[min_index].already_started = 1;
+            }
+
+            table[min_index].end_time = current_cycle + 1;
+            table[min_index].turnaround_time = table[min_index].end_time - table[min_index].arrival;
+            table[min_index].total_remaining--;
+
+            if (table[min_index].total_remaining == 0) {
+                table[min_index].done = 1;
+                num_done++;
+            }
+
+            current_cycle++;
+        } else {
+            current_cycle++;
+        }
+    }
+
+    // Print contents of table 
+    printBatch();
 }
+     	
 
 //*************************************************************
-void option4() {
-
-	// If the dynamic array "PCB" is not NULL, free the memory 
-	if(pcb !=NULL){
-		free(pcb);
+void memoryfree() {
+	// free the schedule table if not NULL 
+	if(table != NULL){
+	free(table);	
 	}
 	quit=1;
-  return;
+	return;
 }
+
 
 //*************************************************************
 int main() {
+    
+    while (quit == 0) {
+        int choice;
+        printf("1. Enter Parameters\n");
+        printf("2. Schedule Processes with FIFO Algorithm\n");
+        printf("3. Schedule Processes with SJF Algorithm\n");
+        printf("4. Schedule Processes with SRT Algorithm\n");
+        printf("5. Quit Program and free memory\n");
+        printf("Choose: ");
+        scanf("%d", &choice);
+        printf("choice %d \n",choice);
+        switch (choice) {
+            case 1:
+                parameters();
+                break;
+            case 2:
+                FIFO();
+                break;
+            case 3:
+                SJF();
+                break;
+            case 4:
+                SRT();
+                break;
+            case 5:
+                memoryfree();
+                break;
+            default:
+                printf("Invalid Input\n");
+                main();
+                break;
+        }
+    }
 
-	// Declare local variables 
-	
-	// Until the user quits, print the menu, prompt for the menu choice, call the appropriate procedure 
-	while(quit==0){
-		printf("Menu\n");
-		printf("1.Enter Parameters\n");
-		printf("2.Create a new child process\n");
-		printf("3.Destroy all descendants of a process\n");
-		printf("4.Quit program and free memory\n");
-
-		int selection;
-		printf("Enter selection: ");
-		scanf("%d",&selection);
-
-		switch(selection){
-			case 1:
-			option1();
-			break;
-			case 2:
-			option2();
-			break;
-			case 3:
-			option3();
-			break;
-			case 4:
-			printf("Bye!\n");
-			option4();
-			break;
-			default:
-			printf("Invalid Input\n");
-			main();
-		}
-
-	}
+    return 0;
 }
+ // while loop 
+	  // indicates succes\ns// end of procedur\ne
+	  
