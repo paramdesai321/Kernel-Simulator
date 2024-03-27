@@ -134,16 +134,17 @@ void "OPTION #2"() {
 	int i,j,n;
 	// prompt for process, resource, and number of units requested
 	// if enough units available and request is less than need
+    if((n<=available[j] && (n<=need[i*num_resources+j]))){
 		// reduce number of available units
 	available[j] -= n;
 
 		// increase number of allocated units
 	allocated[i*num_resources+j] ++;
 		// reduce number of needed units
-    need[i*num_processes+j] +=n; 
+    need[i*num_processes+j] -=n; 
 
 		// print updated available, allocated, and need vectors/matrices
-    
+    } 
 	// else
 		print message that request was denied
 	return;
@@ -155,9 +156,22 @@ void "OPTION #3"() {
 	// declare local variables
 	// prompt for process, resource, and number of units requested
 	// if enough units allocated
+		
+	
+        int i,j,n;
+	// prompt for process, resource, and number of units requested
+	
+    if( (n<=alloated[i*num_resources+j])){
 		// increase number of available units
+	available[j] += n;
+
 		// reduce number of allocated units
-		// increase number of needed units
+	allocated[i*num_resources+j] --;
+			// increase number of needed units
+    need[i*num_processes+j] +=n; 
+
+		// print updated available, allocated, and need vectors/matrices
+    } 
 		// print updated available, allocated, and need vectors/matrices
 	// else
 		print message that release cannot be performed
@@ -169,6 +183,7 @@ void "OPTION #3"() {
 void "OPTION #4"() {
 
 	// declare local variables
+    int i,j,n;
 	// while not all processes are processed
 		// for each process  
 			// if process has not been processed yet 	 
