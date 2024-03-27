@@ -183,7 +183,9 @@ void "OPTION #3"() {
 void "OPTION #4"() {
 
 	// declare local variables
-    int i,j,n;
+    int *done = (int *)calloc(num_processes,sizeof(int)); // calloc means malloc and clear + for some oblivous reason in calloc you need two argument calloc(index, width of the index)
+    
+
 	// while not all processes are processed
 		// for each process  
 			// if process has not been processed yet 	 
