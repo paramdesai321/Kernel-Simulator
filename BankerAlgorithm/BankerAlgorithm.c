@@ -1,13 +1,15 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+
+
 // Declare dynamic arrays/vectors and global variables
 int *resource = NULL; // all existing units of each resource //vector
 int *available = NULL; // available units of each resource //vector
 int *maxclaim = NULL; // all units of each resource that each process may claim 
 int *allocated = NULL; // all units of each resource that each process currently holds
 int *need = NULL; // all units of each resource that each process still wants
-
+int maxclaim;
 int num_processes;
 int num_resources;
  
@@ -64,7 +66,7 @@ void print_matrix(int *matrix, char *title) {
     return;
 }
 //**************************************************************
-void "OPTION #1"() {
+void resource_claim() {
 
     // prompt for number of resources 
     printf("Number of resources? \n");
@@ -79,7 +81,7 @@ void "OPTION #1"() {
 
     for(int j = 0; j < num_resources; j++)
     {
-        scanf("%d", resource[j]);
+        scanf("%d",resource[j]);
         available[j] = resource[j];
     }
 
@@ -88,6 +90,8 @@ void "OPTION #1"() {
     scanf("%d", &num_processes);
 
     // allocate memory for arrays
+    maxclaim[num_processes][num_resources];
+
     maxclaim = (int *)malloc(num_processes * num_resources * sizeof(int));
     allocated = (int *)malloc(num_processes * num_resources * sizeof(int));
     need = (int *)malloc(num_processes * num_resources * sizeof(int));
@@ -101,7 +105,7 @@ void "OPTION #1"() {
         for (int j = 0; j < num_resources; j++)
         {
             scanf("%d", maxclaim[i * num_resources + j]);
-            need[i * num_resources + j] = maxclaim[i * num_resources + j];
+            need[i * num_resources + j] = maxclaim[i * num_resources + j];// similar to need[i][j] = maxclaim[i][j]
         }
     }
 // Do same for allocated
@@ -130,96 +134,149 @@ void "OPTION #1"() {
 
 //**************************************************************
 void "OPTION #2"() {
-	// declare local variables
-	int i,j,n;
-	// prompt for process, resource, and number of units requested
-	// if enough units available and request is less than need
+    // declare local variables
+    int i,j,n;
+    // prompt for process, resource, and number of units requested
+    // if enough units available and request is less than need
     if((n<=available[j] && (n<=need[i*num_resources+j]))){
-		// reduce number of available units
-	available[j] -= n;
+        // reduce number of available units
+    available[j] -= n;
 
-		// increase number of allocated units
-	allocated[i*num_resources+j] ++;
-		// reduce number of needed units
+        // increase number of allocated units
+    allocated[i*num_resources+j] ++;
+        // reduce number of needed units
     need[i*num_processes+j] -=n; 
 
-		// print updated available, allocated, and need vectors/matrices
+        // print updated available, allocated, and need vectors/matrices
     } 
-	// else
-		print message that request was denied
-	return;
+    // else
+        print message that request was denied
+    return;
 }
 
 
 //**************************************************************
 void "OPTION #3"() {
-	// declare local variables
-	// prompt for process, resource, and number of units requested
-	// if enough units allocated
-		
-	
+    // declare local variables
+    // prompt for process, resource, and number of units requested
+    // if enough units allocated
+        
+    
         int i,j,n;
-	// prompt for process, resource, and number of units requested
-	
+    // prompt for process, resource, and number of units requested
+    
     if( (n<=alloated[i*num_resources+j])){
-		// increase number of available units
-	available[j] += n;
+        // increase number of available units
+    available[j] += n;
 
-		// reduce number of allocated units
-	allocated[i*num_resources+j] --;
-			// increase number of needed units
+        // reduce number of allocated units
+    allocated[i*num_resources+j] --;
+            // increase number of needed units
     need[i*num_processes+j] +=n; 
 
-		// print updated available, allocated, and need vectors/matrices
+        // print updated available, allocated, and need vectors/matrices
     } 
-		// print updated available, allocated, and need vectors/matrices
-	// else
-		print message that release cannot be performed
-	return;
+        // print updated available, allocated, and need vectors/matrices
+    // else
+        print message that release cannot be performed
+    return;
 }
 
 
 //******************************************************************
 void "OPTION #4"() {
 
-	// declare local variables
+    // declare local variables
     int *done = (int *)calloc(num_processes,sizeof(int)); // calloc means malloc and clear + for some oblivous reason in calloc you need two argument calloc(index, width of the index)
-    
+    int *sequence = (int *)malloc(num_processes* sizeof(int));
+    int at_least_one = 1;
+    int less_than_or_equal;
 
-	// while not all processes are processed
-		// for each process  
-			// if process has not been processed yet 	 
-				// print message comparing need vector with available vector
-				// for each resource 
-					// check for safe processing by comparing process' need vector to available vector 
-	      			// if each resource is available 
-					// print message that process can be processed
-					// update number of available units of resource 
-					// for each resource 
-						free all resources allocated to process 
-						// increment number of sequenced processes 
-				// else print message that process cannot be processed
-	//if (no process was processed in the final round of the for-loop)
-		// print message of deadlock among processes not processed
-	// else print safe sequence of processes
-	return;
+    // while not all processes are processed
+    while((num_done< num_processes)&&(at_least_one ==1)){
+
+        at_least_one = 0;
+        // for each process  
+        for(int i=0;i< num_processes;i++){
+            less_than_or_equal=1; 
+            // if process has not been processed yet    
+            if(done[i]==0){
+                // print message comparing need vector with available vector
+                printf("Comparing: <");
+                for( int j=0;j<num_resources;j++){
+                    printf("%d", need[i*num_resources+j]);
+                    printf("...");
+                    
+                }
+            // for each resource 
+            for(int j=0;j<num_resources;j++){
+                 printf("%d", available[i*num_resources+j]); /// THIS LINE IS QUESTIONABLE
+            }
+
+
+
+                for(int j=0;j<num_resources;j++){
+                    // check for safe processing by comparing process' need vector to available vector 
+                     less_than_or_equal &=(need[i*num_resources+j]<=available[j]);
+
+
+                }
+                    // if each resource is available 
+                if(less_than_or_equal ==1){
+                        // print message that process can be processed
+                    printf(": Safe to run process p %d", i);
+                        // update number of available units of for each resource 
+                        for(int j=0;j<num_resources;j++){
+                            available [j] += allocated[i*num_processes+j];
+                            allocated[i*num_resources+j] = 0;
+                        }
+                    sequence[num_done] =i;
+                    num_done ++; 
+                    done[i] = i;
+                    at_least_one = 1;   
+
+
+                }
+
+            }
+
+        }
+             
+                
+                
+                    
+                
+                
+                    
+
+                        free all resources allocated to process 
+                        // increment number of sequenced processes 
+                // else print message that process cannot be processed
+    //if (no process was processed in the final round of the for-loop)
+        // print message of deadlock among processes not processed
+    // else print safe sequence of processes
+
+    }
+    return;
 }
 
 
 //******************************************************************
 void "OPTION #5"() {
-	// check if vectors/array are not NULL--if so, free each vector/array 	);
-	return;
+    // check if vectors/array are not NULL--if so, free each vector/array   );
+    return;
 }
 
 
 //*************************************************************
 int main() {
-	// declare local vars 
-	// while user has not chosen to quit 
-		// print menu of options 
-		// prompt for menu selection 
-		// call appropriate procedure based on choice--use switch statement or series of if, else if, else statements 	
-	} // while loop 
-	 return 1; // indicates success 
-} // end of procedure 
+    // declare local vars 
+    // while user has not chosen to quit 
+        // print menu of options 
+        // prompt for menu selection 
+        // call appropriate procedure based on choice--use switch statement or series of if, else if, else statements   
+     // while loop 
+    resource_claim();
+     return 1; // indicates success 
+
+}
