@@ -159,7 +159,12 @@ void request_resource() {
         // increase number of allocated units
     allocated[i*num_resources+j] +=n;
         // reduce number of needed units
-    need[i*num_processes+j] -=n;        
+    need[i*num_processes+j] -=n;    
+
+            print_vector(available,"Available");
+            print_matrix(allocated,"Allocated");
+            print_matrix(need,"Need");
+
         }       
     
         // print updated available, allocated, and need vectors/matrices
@@ -168,6 +173,7 @@ void request_resource() {
     else{
         printf("Request Denied");
     }
+
     return;
 }
 
@@ -313,6 +319,7 @@ int main() {
         // call appropriate procedure based on choice--use switch statement or series of if, else if, else statements   
      // while loop 
     resource_claim(); 
+    request_resource();
      return 1; // indicates success 
 
 }
