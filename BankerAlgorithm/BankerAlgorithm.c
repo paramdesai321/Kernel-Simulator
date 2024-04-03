@@ -125,18 +125,30 @@ void resource_claim() {
     // print resource vector, available vector, maxclaim array, allocated array, need array 
     print_vector(resource, "Resources");
     print_vector(available, "Available");
-    print_vector(maxclaim, "Maxlaim");
-    print_vector(allocated, "Allocated");
+    print_vector(maxclaim, "Maxlaim")
+;    print_vector(allocated, "Allocated");
     print_vector(need, "Need");
 
     return;
 }
 
 //**************************************************************
-void "OPTION #2"() {
+void request_resource() {
     // declare local variables
-    int i,j,n;
+    int process;
+    int resource;
+    int units;
     // prompt for process, resource, and number of units requested
+    printf("Enter requesting process: p");
+    scanf("%d", process);
+
+    printf("Realease resource from a process: r");
+    scanf("%d",resource);
+
+
+    printf("Enter the number of units process p%d is requesting from r%d: ",process,resource);
+    scanf("%d",units);
+
     // if enough units available and request is less than need
     if((n<=available[j] && (n<=need[i*num_resources+j]))){
         // reduce number of available units
@@ -150,7 +162,9 @@ void "OPTION #2"() {
         // print updated available, allocated, and need vectors/matrices
     } 
     // else
-        print message that request was denied
+    else{
+        printf("Request Denied");
+    }
     return;
 }
 
