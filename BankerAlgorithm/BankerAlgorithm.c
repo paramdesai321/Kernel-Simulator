@@ -149,6 +149,9 @@ void request_resource() {
     printf("Enter the number of units process p%d is requesting from r%d: ",process,resource);
     scanf("%d",units);
 
+    for(int i=0;i<num_processes;i++){
+
+            for(int j=0;j<num_resources;j++){
     // if enough units available and request is less than need
     if((n<=available[j] && (n<=need[i*num_resources+j]))){
         // reduce number of available units
@@ -158,7 +161,8 @@ void request_resource() {
     allocated[i*num_resources+j] ++;
         // reduce number of needed units
     need[i*num_processes+j] -=n; 
-
+        }       
+    }
         // print updated available, allocated, and need vectors/matrices
     } 
     // else
