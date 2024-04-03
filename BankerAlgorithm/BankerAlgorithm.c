@@ -224,13 +224,18 @@ void sequence() {
                 printf("Comparing: <");
                 for( int j=0;j<num_resources;j++){
                     printf("%d", need[i*num_resources+j]);
-                    printf("...");
+                    printf(",");
                     
                 }
+                printf("> <=");
             // for each resource 
+                printf("<");
             for(int j=0;j<num_resources;j++){
-                 printf("%d", available[i*num_resources+j]); /// THIS LINE IS QUESTIONABLE
+                 printf("%d", available[i*num_resources+j]); 
+                 printf(",");
+
             }
+                printf(">");
 
 
 
@@ -268,7 +273,7 @@ void sequence() {
                 
                     
 
-                        free all resources allocated to process 
+                       // free all resources allocated to process 
                         // increment number of sequenced processes 
                 // else print message that process cannot be processed
     //if (no process was processed in the final round of the for-loop)
@@ -281,7 +286,7 @@ void sequence() {
 
 
 //******************************************************************
-void "OPTION #5"() {
+void quit() {
     // check if vectors/array are not NULL--if so, free each vector/array   );
     return;
 }
