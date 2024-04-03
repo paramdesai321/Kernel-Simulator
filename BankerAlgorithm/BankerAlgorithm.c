@@ -15,32 +15,24 @@ int num_resources;
 
 //*********************************************************
 void print_vector(int *vector, char *title) {
-
-    //Print the title
-    printf("%s", title);
+    // Print the title
+    printf("%s\n", title);
     
-    // for loop j: print each resource index 
-    for(int j = 0; j < num_resources; j++)
-    {
-        printf("r%d\n",j);
-    }
-
-    // for loop j: print value of vector[j] 
-    for(int j = 0; j < num_resources; j++)
-    {
-        printf(" %d\t \n", vector[j]);
+    // Print resource indices and corresponding values
+    for (int j = 0; j < num_resources; j++) {
+        printf("r%d: %d\n", j, vector[j]);
     }
 
     printf("\n");
-
-    return;
 }
+
 
 //*************************************************************
 void print_matrix(int *matrix, char *title) { 
 
     //Print the title
-    printf("%s", title);
+   
+    printf("%s\n", title);
     
     // for loop j: print each resource index 
     for(int j = 0; j < num_resources; j++)
@@ -51,7 +43,7 @@ void print_matrix(int *matrix, char *title) {
     // for each process i: 
     for(int i = 0; i < num_processes; i++)
     {
-        printf("\tr%d\t", i);
+        printf("\tp%d\t", i);
 
         // for each resource j: 
         for(int j= 0; j < num_resources; j++)
@@ -125,9 +117,9 @@ void resource_claim() {
     // print resource vector, available vector, maxclaim array, allocated array, need array 
     print_vector(resource, "Resources");
     print_vector(available, "Available");
-    print_vector(maxclaim, "Maxlaim")
-;    print_vector(allocated, "Allocated");
-    print_vector(need, "Need");
+    print_matrix(maxclaim, "Maxlaim")
+;    print_matrix(allocated, "Allocated");
+    print_matrix(need, "Need");
 
     return;
 }
