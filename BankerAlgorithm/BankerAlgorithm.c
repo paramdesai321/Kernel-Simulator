@@ -160,7 +160,7 @@ void request_resource() {
         // increase number of allocated units
     allocated[i*num_resources+j] ++;
         // reduce number of needed units
-    need[i*num_processes+j] -=n; 
+    need[i*num_processes+j] -=n;        
         }       
     }
         // print updated available, allocated, and need vectors/matrices
@@ -174,13 +174,13 @@ void request_resource() {
 
 
 //**************************************************************
-void "OPTION #3"() {
+void release_resource() {
     // declare local variables
     // prompt for process, resource, and number of units requested
     // if enough units allocated
         
     
-        int i,j,n;
+        
     // prompt for process, resource, and number of units requested
     
     if( (n<=alloated[i*num_resources+j])){
@@ -202,9 +202,19 @@ void "OPTION #3"() {
 
 
 //******************************************************************
-void "OPTION #4"() {
+void release_resource() {
 
     // declare local variables
+    int process, resource, units;
+    printf("Enter requesting process: p");
+    scanf("%d", process);
+
+    printf("Realease resource from a process: r");
+    scanf("%d",resource);
+
+
+    printf("Enter the number of units process p%d is requesting from r%d: ",process,resource);
+    scanf("%d",units);
     int *done = (int *)calloc(num_processes,sizeof(int)); // calloc means malloc and clear + for some oblivous reason in calloc you need two argument calloc(index, width of the index)
     int *sequence = (int *)malloc(num_processes* sizeof(int));
     int at_least_one = 1;
