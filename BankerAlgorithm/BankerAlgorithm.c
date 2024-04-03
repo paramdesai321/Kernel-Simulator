@@ -22,13 +22,13 @@ void print_vector(int *vector, char *title) {
     // for loop j: print each resource index 
     for(int j = 0; j < num_resources; j++)
     {
-        printf("r%d\t", j);
+        printf("r%d\n",j);
     }
 
     // for loop j: print value of vector[j] 
     for(int j = 0; j < num_resources; j++)
     {
-        printf("r%d\t", vector[j]);
+        printf(" %d\t \n", vector[j]);
     }
 
     printf("\n");
@@ -69,7 +69,7 @@ void resource_claim() {
 
 
     // prompt for number of resources 
-    printf("Number of resources? \n");
+    printf("Number of resources?");
     scanf("%d", &num_resources);
 
     // allocate memory for vectors 
@@ -86,7 +86,7 @@ void resource_claim() {
     }
 
     // prompt for number of processes
-    printf("Num of procs? : \n");
+    printf("Num of procs? :");
     scanf("%d", &num_processes);
 
     // allocate memory for arrays
@@ -311,7 +311,7 @@ int main() {
         // prompt for menu selection 
         // call appropriate procedure based on choice--use switch statement or series of if, else if, else statements   
      // while loop 
-    resource_claim();
+    resource_claim(); 
      return 1; // indicates success 
 
 }
