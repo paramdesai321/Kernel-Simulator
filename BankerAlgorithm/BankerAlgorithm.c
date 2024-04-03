@@ -68,6 +68,7 @@ void print_matrix(int *matrix, char *title) {
 //**************************************************************
 void resource_claim() {
 
+
     // prompt for number of resources 
     printf("Number of resources? \n");
     scanf("%d", &num_resources);
@@ -135,36 +136,33 @@ void resource_claim() {
 //**************************************************************
 void request_resource() {
     // declare local variables
-    int process;
-    int resource;
-    int units;
+    int i,j,n;
     // prompt for process, resource, and number of units requested
     printf("Enter requesting process: p");
-    scanf("%d", process);
+    scanf("%d", i);
 
     printf("Realease resource from a process: r");
-    scanf("%d",resource);
+    scanf("%d",j);
 
 
     printf("Enter the number of units process p%d is requesting from r%d: ",process,resource);
-    scanf("%d",units);
+    scanf("%d",n);
 
-    for(int i=0;i<num_processes;i++){
-
-            for(int j=0;j<num_resources;j++){
+    
+          
     // if enough units available and request is less than need
     if((n<=available[j] && (n<=need[i*num_resources+j]))){
         // reduce number of available units
     available[j] -= n;
 
         // increase number of allocated units
-    allocated[i*num_resources+j] ++;
+    allocated[i*num_resources+j] +=n;
         // reduce number of needed units
     need[i*num_processes+j] -=n;        
         }       
-    }
+    
         // print updated available, allocated, and need vectors/matrices
-    } 
+    
     // else
     else{
         printf("Request Denied");
@@ -188,7 +186,7 @@ void release_resource() {
     available[j] += n;
 
         // reduce number of allocated units
-    allocated[i*num_resources+j] --;
+    allocated[i*num_resources+j] -= n;
             // increase number of needed units
     need[i*num_processes+j] +=n; 
 
@@ -196,25 +194,18 @@ void release_resource() {
     } 
         // print updated available, allocated, and need vectors/matrices
     // else
-        print message that release cannot be performed
+    else{
+       printf("Cannot Realease");
+    }
     return;
 }
 
 
 //******************************************************************
-void release_resource() {
+void sequence() {
 
     // declare local variables
-    int process, resource, units;
-    printf("Enter requesting process: p");
-    scanf("%d", process);
-
-    printf("Realease resource from a process: r");
-    scanf("%d",resource);
-
-
-    printf("Enter the number of units process p%d is requesting from r%d: ",process,resource);
-    scanf("%d",units);
+    
     int *done = (int *)calloc(num_processes,sizeof(int)); // calloc means malloc and clear + for some oblivous reason in calloc you need two argument calloc(index, width of the index)
     int *sequence = (int *)malloc(num_processes* sizeof(int));
     int at_least_one = 1;
