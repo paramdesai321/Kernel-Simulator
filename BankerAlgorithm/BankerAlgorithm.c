@@ -15,17 +15,26 @@ int num_resources;
 
 //*********************************************************
 void print_vector(int *vector, char *title) {
-    // Print the title
-    printf("%s\n", title);
+
+    //Print the title
+    printf("%s", title);
     
-    // Print resource indices and corresponding values
-    for (int j = 0; j < num_resources; j++) {
-        printf("r%d: %d\n", j, vector[j]);
+    // for loop j: print each resource index 
+    for(int j = 0; j < num_resources; j++)
+    {
+        printf("r%d\n",j);
+    }
+
+    // for loop j: print value of vector[j] 
+    for(int j = 0; j < num_resources; j++)
+    {
+        printf(" %d\t \n", vector[j]);
     }
 
     printf("\n");
-}
 
+    return;
+}
 
 //*************************************************************
 void print_matrix(int *matrix, char *title) { 
