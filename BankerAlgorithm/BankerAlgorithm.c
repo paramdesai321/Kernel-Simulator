@@ -8,8 +8,7 @@ int *resource = NULL; // all existing units of each resource //vector
 int *available = NULL; // available units of each resource //vector
 int *maxclaim = NULL; // all units of each resource that each process may claim 
 int *allocated = NULL; // all units of each resource that each process currently holds
-int *need = NULL; // all units of each resource that each process still wants
-int maxclaim;
+int *need = NULL; // all units of each resource that each process still wantsint maxclaim;
 int num_processes;
 int num_resources;
  
@@ -82,7 +81,7 @@ void resource_claim() {
 
     for(int j = 0; j < num_resources; j++)
     {
-        scanf("%d",resource[j]);
+        scanf("%d",&resource[j]);
         available[j] = resource[j];
     }
 
@@ -91,7 +90,7 @@ void resource_claim() {
     scanf("%d", &num_processes);
 
     // allocate memory for arrays
-    maxclaim[num_processes][num_resources];
+    
 
     maxclaim = (int *)malloc(num_processes * num_resources * sizeof(int));
     allocated = (int *)malloc(num_processes * num_resources * sizeof(int));
@@ -105,7 +104,7 @@ void resource_claim() {
         // for each process, for each resource, prompt for number of resource units allocated to process 
         for (int j = 0; j < num_resources; j++)
         {
-            scanf("%d", maxclaim[i * num_resources + j]);
+            scanf("%d", &maxclaim[i * num_resources + j]);
             need[i * num_resources + j] = maxclaim[i * num_resources + j];// similar to need[i][j] = maxclaim[i][j]
         }
     }
@@ -117,7 +116,7 @@ void resource_claim() {
         // for each process, for each resource, prompt for number of resource units allocated to process 
         for (int j = 0; j < num_resources; j++)
         {
-            scanf("%d", allocated[i * num_resources + j]);
+            scanf("%d", &allocated[i * num_resources + j]);
             need[i * num_resources + j] -= allocated[i * num_resources + j];
             available[j] -= allocated[i * num_resources + j];
         }
@@ -136,22 +135,23 @@ void resource_claim() {
 //**************************************************************
 void request_resource() {
     // declare local variables
-    int i,j,n;
+    int i, j, n;
+    int num_done = 0;
     // prompt for process, resource, and number of units requested
     printf("Enter requesting process: p");
-    scanf("%d", i);
+    scanf("%d", &i);
 
-    printf("Realease resource from a process: r");
-    scanf("%d",j);
+    printf("request resource from a process: r");
+    scanf("%d",&j);
 
 
-    printf("Enter the number of units process p%d is requesting from r%d: ",process,resource);
-    scanf("%d",n);
+    printf("Enter the number of units process p%d is requesting from r%d: ",i,j);
+    scanf("%d",&n);
 
     
           
     // if enough units available and request is less than need
-    if((n<=available[j] && (n<=need[i*num_resources+j]))){
+    if((n<=available[j]) && (n<=need[i*num_resources+j])){
         // reduce number of available units
     available[j] -= n;
 
@@ -176,12 +176,22 @@ void release_resource() {
     // declare local variables
     // prompt for process, resource, and number of units requested
     // if enough units allocated
-        
-    
+      int i,j,n;
+      int num_done = 0;
+    printf("Enter Realease process: p");
+    scanf("%d", &i);
+
+    printf("Realease resource from a process: r");
+    scanf("%d",&j);
+
+
+    printf("Enter the number of units process p%d is releasing from r%d: ",i,j);
+    scanf("%d",&n);
+
         
     // prompt for process, resource, and number of units requested
     
-    if( (n<=alloated[i*num_resources+j])){
+    if((n<=allocated[i*num_resources+j])){
         // increase number of available units
     available[j] += n;
 
@@ -210,6 +220,7 @@ void sequence() {
     int *sequence = (int *)malloc(num_processes* sizeof(int));
     int at_least_one = 1;
     int less_than_or_equal;
+    int num_done = 0;
 
     // while not all processes are processed
     while((num_done< num_processes)&&(at_least_one ==1)){
