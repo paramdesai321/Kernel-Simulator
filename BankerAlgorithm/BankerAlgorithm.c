@@ -205,13 +205,18 @@ void release_resource() {
         // reduce number of allocated units
     allocated[i*num_resources+j] -= n;
             // increase number of needed units
-    need[i*num_processes+j] +=n; 
+    need[i*num_resources+j] +=n; 
 
         // print updated available, allocated, and need vectors/matrices
+          print_vector(available,"Available");
+            print_matrix(allocated,"Allocated");
+            print_matrix(need,"Need");
     } 
         // print updated available, allocated, and need vectors/matrices
     // else
+
     else{
+
        printf("Cannot Realease");
     }
     return;
@@ -322,6 +327,7 @@ int main() {
      // while loop 
     resource_claim(); 
     request_resource();
+    release_resource();
      return 1; // indicates success 
 
 }
