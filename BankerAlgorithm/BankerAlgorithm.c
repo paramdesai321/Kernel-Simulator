@@ -159,7 +159,7 @@ void request_resource() {
         // increase number of allocated units
     allocated[i*num_resources+j] +=n;
         // reduce number of needed units
-    need[i*num_processes+j] -=n;    
+    need[i*num_resources+j] -=n;    
 
             print_vector(available,"Available");
             print_matrix(allocated,"Allocated");
@@ -243,6 +243,7 @@ void sequence() {
                 for( int j=0;j<num_resources;j++){
                     printf("%d", need[i*num_resources+j]);
                     printf(",");
+
                     
                 }
                 printf("> <=");
@@ -254,6 +255,7 @@ void sequence() {
 
             }
                 printf(">");
+                
 
 
 
