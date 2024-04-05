@@ -124,11 +124,11 @@ void resource_claim() {
     }
     
     // print resource vector, available vector, maxclaim array, allocated array, need array 
-    print_vector(resource, "Resources");
-    print_vector(available, "Available");
-    print_matrix(maxclaim, "Maxlaim")
-;    print_matrix(allocated, "Allocated");
-    print_matrix(need, "Need");
+    print_vector(resource, "Resources\n");
+    print_vector(available, "Available\n");
+    print_matrix(maxclaim, "Maxlaim\n")
+;    print_matrix(allocated, "Allocated\n");
+    print_matrix(need, "Need\n");
 
     return;
 }
@@ -161,9 +161,10 @@ void request_resource() {
         // reduce number of needed units
     need[i*num_resources+j] -=n;    
 
-            print_vector(available,"Available");
-            print_matrix(allocated,"Allocated");
-            print_matrix(need,"Need");
+            print_vector(available,"Available\n");
+            print_matrix(allocated,"Allocated\n");
+            print_matrix(need,"Need\n");
+
 
         }       
     
@@ -255,14 +256,11 @@ void BankingAlgorithm() {
             // for each resource 
                 printf("<");
             for(int j=0;j<num_resources;j++){
-                 printf("%d", available[i*num_resources+j]); 
+                 printf("%d", available[j]); 
                  printf(",");
 
             }
                 printf(">");
-                
-
-
 
                 for(int j=0;j<num_resources;j++){
                     // check for safe processing by comparing process' need vector to available vector 
@@ -273,7 +271,7 @@ void BankingAlgorithm() {
                     // if each resource is available 
                 if(less_than_or_equal ==1){
                         // print message that process can be processed
-                    printf(": Safe to run process p %d", i);
+                    printf(": Safe to run process p %d\n", i);
                         // update number of available units of for each resource 
                         for(int j=0;j<num_resources;j++){
                             available [j] += allocated[i*num_resources+j];
@@ -287,7 +285,7 @@ void BankingAlgorithm() {
 
                 }
                 else{
-                        printf("Not safe to print p%d\n",i);
+                        printf("Not safe to run process p%d\n",i);
                 }
             }
 
