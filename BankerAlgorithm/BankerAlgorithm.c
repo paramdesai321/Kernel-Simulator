@@ -224,7 +224,7 @@ void release_resource() {
 
 
 //******************************************************************
-void sequence() {
+void BankingAlgorithm() {
 
     // declare local variables
     
@@ -276,17 +276,19 @@ void sequence() {
                     printf(": Safe to run process p %d", i);
                         // update number of available units of for each resource 
                         for(int j=0;j<num_resources;j++){
-                            available [j] += allocated[i*num_processes+j];
+                            available [j] += allocated[i*num_resources+j];
                             allocated[i*num_resources+j] = 0;
                         }
                     sequence[num_done] =i;
                     num_done ++; 
-                    done[i] = i;
+                    done[i] = 1;
                     at_least_one = 1;   
 
 
                 }
-
+                else{
+                        printf("Not safe to print p%d\n",i);
+                }
             }
 
         }
@@ -328,6 +330,7 @@ int main() {
     resource_claim(); 
     request_resource();
     release_resource();
+    BankingAlgorithm();
      return 1; // indicates success 
 
 }
