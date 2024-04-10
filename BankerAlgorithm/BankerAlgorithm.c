@@ -11,6 +11,7 @@ int *allocated = NULL; // all units of each resource that each process currently
 int *need = NULL; // all units of each resource that each process still wantsint maxclaim;
 int num_processes;
 int num_resources;
+int quit=0; // the quit flag
  
 
 //*********************************************************
@@ -164,8 +165,6 @@ void request_resource() {
             print_vector(available,"Available\n");
             print_matrix(allocated,"Allocated\n");
             print_matrix(need,"Need\n");
-
-
         }       
     
         // print updated available, allocated, and need vectors/matrices
@@ -308,11 +307,22 @@ void BankingAlgorithm() {
     }
     return;
 }
+    
+void free_vector(int *vector){
 
+    if(vector !=NULL) vector = NULL;
+
+}
 
 //******************************************************************
 void quit() {
     // check if vectors/array are not NULL--if so, free each vector/array   );
+    free_vector(resource);
+    free_vector(available);
+    free_vector(maxclaim);
+    free_vector(allocated);
+    free_vector(need);
+     quit =1;
     return;
 }
 
@@ -325,10 +335,14 @@ int main() {
         // prompt for menu selection 
         // call appropriate procedure based on choice--use switch statement or series of if, else if, else statements   
      // while loop 
+        /*
     resource_claim(); 
     request_resource();
     release_resource();
     BankingAlgorithm();
+    */
+
+    while(quit)
      return 1; // indicates success 
 
 }
