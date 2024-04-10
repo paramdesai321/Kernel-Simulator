@@ -286,7 +286,7 @@ void BankingAlgorithm() {
                 else{
                         printf("Not safe to run process p%d\n",i);
                 }
-            }
+           }
 
         }
              
@@ -342,7 +342,18 @@ int main() {
     BankingAlgorithm();
     */
 
-    while(quit)
-     return 1; // indicates success 
+    while(quit ==1){
+        printf("---Banking Algorithm---\n");
+        printf("1. Enter resource claim graph data\n");
+        printf("2. Request resource by process\n");
+        printf("3. Release resource from a process\n");
+        printf("4. Determine the safe sequence of a process\n");/**/
+        printf("5. Quit Program");
+        
 
+    }
+
+
+
+    return 1;
 }
