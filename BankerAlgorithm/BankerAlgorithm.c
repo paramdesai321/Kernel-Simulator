@@ -23,17 +23,19 @@ void print_vector(int *vector, char *title) {
     // for loop j: print each resource index 
     for(int j = 0; j < num_resources; j++)
     {
-        printf("r%d\n",j);
+        printf("r%d  " ,j);
+
     }
+    printf("\n");
+
 
     // for loop j: print value of vector[j] 
     for(int j = 0; j < num_resources; j++)
     {
-        printf(" %d\t \n", vector[j]);
-    }
+        printf("%d ",vector[j]);
 
     printf("\n");
-
+}
     return;
 }
 
@@ -47,20 +49,22 @@ void print_matrix(int *matrix, char *title) {
     // for loop j: print each resource index 
     for(int j = 0; j < num_resources; j++)
     {
-        printf("\tr%d\t", j);
+        printf("  r%d  ", j);
     }
 
     // for each process i: 
+    printf("\n");
     for(int i = 0; i < num_processes; i++)
     {
-        printf("\tp%d\t", i);
+        printf("  p%d  ", i);
 
         // for each resource j: 
         for(int j= 0; j < num_resources; j++)
         {
             // print value of matrix[i,j]
-            printf("%d", matrix[(i * num_resources) + j ]); //Can't print 2d arrays in C. Neat trick. Other ways to do it. Who cares.
+            printf("%d   ", matrix[(i * num_resources) + j ]); //Can't print 2d arrays in C. Neat trick. Other ways to do it. Who cares.
         }
+        printf("\n");
             
     }
         
@@ -288,9 +292,7 @@ void BankingAlgorithm() {
                 }
            }
 
-        }
-             
-                
+        }                
                 
                     
                 
@@ -305,6 +307,11 @@ void BankingAlgorithm() {
     // else print safe sequence of processes
 
     }
+
+    for(int i=0;i<num_processes;i++){
+        printf("p%d ",sequence[i]);
+    }
+    printf("\n");
     return;
 }
     
@@ -342,13 +349,13 @@ int main() {
     BankingAlgorithm();
     */
 
-    while(quit ==1){
+    while(quit ==0){
         printf("---Banking Algorithm---\n");
         printf("1. Enter resource claim graph data\n");
         printf("2. Request resource by process\n");
         printf("3. Release resource from a process\n");
         printf("4. Determine the safe sequence of a process\n");/**/
-        printf("5. Quit Program");
+        printf("5. Quit Program\n");
         printf("Choose an option");
         int choice;
         scanf("%d",&choice);
@@ -357,15 +364,17 @@ int main() {
             resource_claim();
             break;
         case 2:
-            resource_request();
+            request_resource();
             break;
         case 3:
             release_resource();
             break;
          case 4:
             BankingAlgorithm();
+            break;
         case 5:
-            Quit();
+            Quit(); 
+            break;
         default:
             printf("Invalid Option, please choose again");
 
