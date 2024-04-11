@@ -315,7 +315,7 @@ void free_vector(int *vector){
 }
 
 //******************************************************************
-void quit() {
+void  Quit(){ 
     // check if vectors/array are not NULL--if so, free each vector/array   );
     free_vector(resource);
     free_vector(available);
@@ -349,7 +349,27 @@ int main() {
         printf("3. Release resource from a process\n");
         printf("4. Determine the safe sequence of a process\n");/**/
         printf("5. Quit Program");
-        
+        printf("Choose an option");
+        int choice;
+        scanf("%d",&choice);
+        switch(choice){
+        case 1:
+            resource_claim();
+            break;
+        case 2:
+            resource_request();
+            break;
+        case 3:
+            release_resource();
+            break;
+         case 4:
+            BankingAlgorithm();
+        case 5:
+            Quit();
+        default:
+            printf("Invalid Option, please choose again");
+
+        }
 
     }
 
