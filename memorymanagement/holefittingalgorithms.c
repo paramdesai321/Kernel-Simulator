@@ -37,13 +37,22 @@ ing remaining;
 	return;
 	}
 /********************************************************************/
-void "PROCEDURE TO PRINT ALLOCATION TABLE"() {
 // declare/initialize local variables
-// print header of table containing fields: ID, Start, End
-// print each block in list with while-loop, loop until end of list,
-advancing "current block" pointer
-return;
-}
+	void print_table() {
+		block_type *current ;
+	// print header of table containing fields: ID, Start, End
+	// print each block in list with while-loop, loop until end of list,
+		current = block_list->next;
+	
+		while(current!= NULL){
+			printf("%d\t%d\t%d\n",current->block_id,...);
+			current = current->next;
+	
+		}
+	 
+	return;
+	
+	}
 /********************************************************************/
 void "PROCEDURE FOR OPTION 2"() {
 // declare/initialize local variables
