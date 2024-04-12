@@ -17,7 +17,7 @@ typdef struct node block_type;
 int pm_size;
 ing remaining;
 
-		void "PROCEDURE FOR OPTION 1"() {
+		void Enter_Parameter() {
 	// declare/initialize local variables
 	// prompt for size of physical memory
 			printf("Size of Physical memory: ");
@@ -29,6 +29,10 @@ ing remaining;
 			block_list = (block_type *)malloc(sizeof(block_type)); // this is to save the head, just in case if you choose to remove the actual first block and then your head pointer is gone
 
 	// create "dummy" block with id -1, staring/ending address of 0 and
+			block_list->block_id = -1;
+			block_list->starting = 0;
+			block_list->end = 0;
+			block_list->next = NULL;
 	link of NULL
 	return;
 	}
