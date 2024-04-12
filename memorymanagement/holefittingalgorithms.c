@@ -54,12 +54,34 @@ ing remaining;
 	
 	}
 /********************************************************************/
-void "PROCEDURE FOR OPTION 2"() {
+void First_Fit() {
 // declare/initialize local variables
+	int block_size;
+	int id;
+	block_type *new_block;
 // prompt for block id & block size
+	printf("Size:");
+	scanf("%d",&block_size);
+	... same for id 
+
 // if block size is larger than remaining memory, print message,
-return
+	if(block_size>remaining) {	//no fit
+		printf("Out of memory\n");
+		return;
+	}
 // if block list is "empty", allocate new block, set fields for new
+	if(block_list->next == NULL){
+		new_block = (block_type *)malloc(sizeof(block_type));
+		new_block->block_id = id;
+		new_block->starting = 0;
+		new_block->ending = block_size;
+		new_block->next = NULL;
+		block_list->next = *new_block;
+
+
+	}
+
+
 block, link to block list, reduce remaining memory, print allocation
 table, return
 // initialize "current block" to compare hole
