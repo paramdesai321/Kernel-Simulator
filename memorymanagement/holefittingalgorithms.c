@@ -20,8 +20,14 @@ ing remaining;
 		void "PROCEDURE FOR OPTION 1"() {
 	// declare/initialize local variables
 	// prompt for size of physical memory
+			printf("Size of Physical memory: ");
+			scanf("%d",&pm_size);
+
 	// initilize remaining memory to size of physical memory
+			remaining = pm_size;
 	// allocate memory for linked list of blocks
+			block_list = (block_type *)malloc(sizeof(block_type)); // this is to save the head, just in case if you choose to remove the actual first block and then your head pointer is gone
+
 	// create "dummy" block with id -1, staring/ending address of 0 and
 	link of NULL
 	return;
