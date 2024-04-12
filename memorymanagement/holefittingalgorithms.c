@@ -12,6 +12,11 @@ struct node{
 	struct node *next;
 }*block_list = NULL;
 
+
+typdef struct node block_type;
+int pm_size;
+ing remaining;
+
 		void "PROCEDURE FOR OPTION 1"() {
 	// declare/initialize local variables
 	// prompt for size of physical memory
