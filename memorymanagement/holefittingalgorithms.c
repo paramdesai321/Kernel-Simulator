@@ -59,10 +59,12 @@ void First_Fit() {
 	int block_size;
 	int id;
 	block_type *new_block;
+	block_type *current;
 // prompt for block id & block size
 	printf("Size:");
 	scanf("%d",&block_size);
-	... same for id 
+	printf("ID: ");
+	scanf("%d",&id);
 
 // if block size is larger than remaining memory, print message,
 	if(block_size>remaining) {	//no fit
@@ -76,14 +78,42 @@ void First_Fit() {
 		new_block->starting = 0;
 		new_block->ending = block_size;
 		new_block->next = NULL;
-		block_list->next = *new_block;
+		block_list->next = new_block;
+		remaining -= block_size;
+		print_table();
+		return;
+	}
+	else{
+
+			new_block = (block_type *)malloc(sizeof(block_type));
+			current = block_list->next;
+
+			int current_size = (current->ending)-(current_starting);
+		 while((current->next !=NULL) && (current_size>=block_size)){
+
+		 	current = current->next;
+
+
+		 }
+
+		 current->next = new_block;
+		 new_block->id = id;
+		 new_block->starting = current.ending;
+		 new_block->ending = current_starting+block_size;
+		 new_block->next = NULL;
+		 remaining -= block_size;
+		 print_table();
+		 return;
+
+
 
 
 	}
 
+	
 
-block, link to block list, reduce remaining memory, print allocation
-table, return
+
+
 // initialize "current block" to compare hole
 // while not end of list, loop
 //if duplicate id, print message, return
@@ -91,8 +121,7 @@ table, return
 // while not end of list, loop
 //set values for start and end of current hole
 // if block fits in hole, allocate new block,
-set fields for new block, link to block list, reduce remaining memory,
-print allocation table, return
+
 // advance "current block" pointer
 // if end of list reached, print message no fitting hole
 return;
