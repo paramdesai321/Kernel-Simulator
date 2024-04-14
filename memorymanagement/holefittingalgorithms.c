@@ -135,7 +135,13 @@ void Best_Fit() {
 	scanf("%d",&id);
 
 // if block size is larger than remaining memory, print message,
-return
+
+	if(block_size=>remaining){
+
+		printf("Not enough space\n");
+
+	}
+
 // if block list is "empty", allocate new block, set fields for new
 block, link to block list, reduce remaining memory, print allocation
 table, return
