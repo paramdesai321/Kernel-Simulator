@@ -109,11 +109,6 @@ void First_Fit() {
 
 
 	}
-
-	
-
-
-
 // initialize "current block" to compare hole
 // while not end of list, loop
 //if duplicate id, print message, return
@@ -127,9 +122,18 @@ void First_Fit() {
 return;
 }
 /***************************************************************/
-void "PROCEDURE FOR OPTION 3"() {
+void Best_Fit() {
 // declare/initialize local variables
+	int block_size;
+	int id;
+	block_type *new_block;
+	block_type *current;
 // prompt for block id & block size
+	printf("Size:");
+	scanf("%d",&block_size);
+	printf("ID: ");
+	scanf("%d",&id);
+
 // if block size is larger than remaining memory, print message,
 return
 // if block list is "empty", allocate new block, set fields for new
