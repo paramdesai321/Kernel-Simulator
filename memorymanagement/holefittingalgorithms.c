@@ -129,7 +129,7 @@ void Best_Fit() {
 	block_type *new_block;
 	block_type *current;
 // prompt for block id & block size
-	printf("Size:");
+	printf("Size: ");
 	scanf("%d",&block_size);
 	printf("ID: ");
 	scanf("%d",&id);
@@ -140,11 +140,39 @@ void Best_Fit() {
 
 		printf("Not enough space\n");
 
+
 	}
 
-// if block list is "empty", allocate new block, set fields for new
-block, link to block list, reduce remaining memory, print allocation
-table, return
+	// if block list is "empty", allocate new block, set fields for new
+	if(block_list->next ==NULL){
+		new_block = (block_type *)malloc(sizeof(block_type));
+		new_block->block_id = id;
+		new_block->starting = 0;
+		new_block->ending = block_size;
+		new_block->next = NULL;
+		block_list->next = new_block;
+		remaining -= block_size;
+		print_table();
+		return;
+	}
+	else{
+		// initialize "current block" to compare hole
+
+		new_block = (block_type *)malloc(sizeof(block_type));
+			current = block_list->next;
+			old = block_list;
+
+			int current_size = (current->ending)-(current_starting);
+			int compare  = (old->block_size)-size;
+			int 
+
+		while((current->next!=NULL)&&(compare>=0)&&()){
+
+		}
+	}
+
+
+
 // initialize "current block" to compare hole
 // while not end of list, loop
 //if duplicate id, print message, return
