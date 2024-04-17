@@ -132,6 +132,10 @@ void Best_Fit() {
 	int id;
 	block_type *new_block;
 	block_type *current;
+	block_type *best_block;
+
+	int best_so_far  = pm_size; // to have the best one;
+
 // prompt for block id & block size
 	printf("Size: ");
 	scanf("%d",&block_size);
@@ -241,11 +245,43 @@ return;
 }
 
 /********************************************************************/
-void "PROCEDURE FOR OPTION 5"() {
+void dealloacate() {
 // declare/initialize local variables
+	int id;
+	int block_size;
+	block_type	*current_block = block_list;
+	block_type	*previous_block;
+
 // prompt for block id
+
+	printf("Give a block id\n");
+	scanf();
+	printf("Block size\n");
+	scanf();
+
+
+
 // initialize "current block"
 // while id not found and end of block list not reached
+	while((current_block!=null)&&(block_id !=current->block_id){
+
+		current_block = current_block->next;
+		previous_block = current_block;
+		current_block = current_block->next;
+		
+	}
+
+	if(current_block ==NULL){
+		printf("..");
+		return;
+	}
+
+	previous_block->next = current_block->next;
+	block_size = current_block->ending - current_starting;
+
+	remaining += block_size;
+	free(current_block);
+
 // advance "previous block" pointer and "current block"
 pointer
 // if "current block" is NULL, print message id not found
@@ -255,10 +291,21 @@ print allocation table
 return;
 }
 /********************************************************************/
-void "PROCEDURE FOR OPTION 6"() {
+void compaction() {
 // declare/initialize local variables
 // initialize "current block"
+	block_type	*current_block = block_list;
+	int previous_ending=0;
+
 // while end of block list not reached
+	while(current_block !=NULL){
+		block_size = current_block->ending - current_block->starting;
+		current_block->starting = previous_ending;
+		current_block->ending = current_block->starting + block_size;
+		previous_end = current_block->ending;
+		current_block = current_block->next;
+
+	}
 // adjust start and end fields of each block, compacting
 together
 //print allocation table
