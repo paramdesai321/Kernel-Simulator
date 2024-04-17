@@ -17,6 +17,10 @@ typdef struct node block_type;
 int pm_size;
 ing remaining;
 
+
+
+void	()
+
 		void Enter_Parameter() {
 	// declare/initialize local variables
 	// prompt for size of physical memory
@@ -164,11 +168,28 @@ void Best_Fit() {
 
 			int current_size = (current->ending)-(current_starting);
 			int compare  = (old->block_size)-size;
-			int 
+			
 
-		while((current->next!=NULL)&&(compare>=0)&&()){
+		while((current->next!=NULL)&&(compare>=0)&&(current_size>block_size)&&(compare>current_size)){
+
+
+			current = current->next;
+
+
 
 		}
+
+			old->next = new_block;
+			new_block->next = current;
+			new_block->id = block_id;
+			new_block->starting = old->ending;
+			old_ending->ending = new_block->starting+block_size;
+			new_block->next = current
+			remaing-=block_size;
+			print_table();
+			return;
+
+
 	}
 
 
@@ -218,6 +239,7 @@ far
 list, reduce remaining memory, print allocation table
 return;
 }
+
 /********************************************************************/
 void "PROCEDURE FOR OPTION 5"() {
 // declare/initialize local variables
