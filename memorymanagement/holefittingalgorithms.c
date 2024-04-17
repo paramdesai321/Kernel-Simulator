@@ -312,9 +312,18 @@ together
 return;
 }
 /********************************************************************/
-void "RECURSIVE PROCEDURE FOR OPTION 7"(block_type *node) {
+void free_memory(block_type *node) {
 // if node is NULL return
 // else call self on link field of node, free node
+	if(node == NULL){
+
+		return;
+	}
+	free(node);
+	node = node->next;
+	free_memory(node);
+	
+
 return;
 }
 //*************************************************************
