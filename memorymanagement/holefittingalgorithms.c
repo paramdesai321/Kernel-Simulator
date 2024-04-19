@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 // declare global variables including linked list of blocks containing
-id, starting address, ending address, link to next node in list
+
 //********************************************************************
 struct node{
 
@@ -13,7 +13,7 @@ struct node{
 }*block_list = NULL;
 
 
-typdef struct node block_type;
+typedef struct node block_type;
 int pm_size;
 int remaining;
 
@@ -35,7 +35,7 @@ int remaining;
 	// create "dummy" block with id -1, staring/ending address of 0 and
 			block_list->block_id = -1;
 			block_list->starting = 0;
-			block_list->end = 0;
+			block_list->ending = 0;
 			block_list->next = NULL;
 	
 	return;
@@ -49,7 +49,7 @@ int remaining;
 		current = block_list->next;
 	
 		while(current!= NULL){
-			printf("%d\t%d\t%d\n",current->block_id,...);
+			printf("%d\t%d\t%d\n",current->block_id,current->starting,current->ending);
 			current = current->next;
 	
 		}
@@ -92,7 +92,7 @@ void First_Fit() {
 			new_block = (block_type *)malloc(sizeof(block_type));
 			current = block_list->next;
 
-			int current_size = (current->ending)-(current_starting);
+			int current_size = (current->ending)-(current->starting);
 		 while((current->next !=NULL) && (current_size>=block_size)){
 
 		 	current = current->next;
@@ -101,9 +101,9 @@ void First_Fit() {
 		 }
 
 		 current->next = new_block;
-		 new_block->id = id;
-		 new_block->starting = current.ending;
-		 new_block->ending = current_starting+block_size;
+		 new_block->block_id = id;
+		 new_block->starting = current->ending;
+		 new_block->ending = current->starting+block_size;
 		 new_block->next = NULL;
 		 remaining -= block_size;
 		 print_table();
@@ -125,7 +125,9 @@ void First_Fit() {
 // if end of list reached, print message no fitting hole
 return;
 }
+
 /***************************************************************/
+/*
 void Best_Fit() {
 // declare/initialize local variables
 	int block_size;
@@ -216,7 +218,7 @@ far
 list, reduce remaining memory, print allocation table
 return;
 }
-/***************************************************************/
+
 void "PROCEDURE FOR OPTION 4"() {
 // declare/initialize local variables
 // prompt for block id & block size
@@ -244,7 +246,6 @@ list, reduce remaining memory, print allocation table
 return;
 }
 
-/********************************************************************/
 void dealloacate() {
 // declare/initialize local variables
 	int id;
@@ -290,7 +291,6 @@ increment remaining memory with block size, free block with matching id,
 print allocation table
 return;
 }
-/********************************************************************/
 void compaction() {
 // declare/initialize local variables
 // initialize "current block"
@@ -311,7 +311,7 @@ together
 //print allocation table
 return;
 }
-/********************************************************************/
+
 void free_memory(block_type *node) {
 // if node is NULL return
 // else call self on link field of node, free node
@@ -326,14 +326,15 @@ void free_memory(block_type *node) {
 
 return;
 }
-//*************************************************************
+//*************************************************************/
 int main() {
 // declare local vars
 // while user has not chosen to quit
 // print menu of options
 // prompt for menu selection
 // call appropriate procedure based on choice--use switch
-statement or series of if, else if, else statements
-} // while loop
-return 1; // indicates success
-} // end of procedure
+ // indicates success
+// end of procedure
+	Enter_Parameter();
+	First_Fit();
+}
