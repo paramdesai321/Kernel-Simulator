@@ -103,7 +103,7 @@ void First_Fit() {
 		 current->next = new_block;
 		 new_block->block_id = id;
 		 new_block->starting = current->ending;
-		 new_block->ending = current->starting+block_size;
+		 new_block->ending = new_block->starting+block_size;
 		 new_block->next = NULL;
 		 remaining -= block_size;
 		 print_table();
@@ -336,5 +336,6 @@ int main() {
  // indicates success
 // end of procedure
 	Enter_Parameter();
+	First_Fit();
 	First_Fit();
 }
