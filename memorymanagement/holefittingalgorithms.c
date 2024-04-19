@@ -15,11 +15,11 @@ struct node{
 
 typdef struct node block_type;
 int pm_size;
-ing remaining;
+int remaining;
 
 
 
-void	()
+
 
 		void Enter_Parameter() {
 	// declare/initialize local variables
@@ -37,7 +37,7 @@ void	()
 			block_list->starting = 0;
 			block_list->end = 0;
 			block_list->next = NULL;
-	link of NULL
+	
 	return;
 	}
 /********************************************************************/
@@ -322,7 +322,7 @@ void free_memory(block_type *node) {
 	free(node);
 	node = node->next;
 	free_memory(node);
-	
+
 
 return;
 }
