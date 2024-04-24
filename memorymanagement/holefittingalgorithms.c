@@ -127,7 +127,7 @@ return;
 }
 
 /***************************************************************/
-/*
+
 void Best_Fit() {
 // declare/initialize local variables
 	int block_size;
@@ -135,6 +135,8 @@ void Best_Fit() {
 	block_type *new_block;
 	block_type *current;
 	block_type *best_block;
+	block_type *best_block;
+	int hole_size;
 
 	int best_so_far  = pm_size; // to have the best one;
 
@@ -163,6 +165,7 @@ void Best_Fit() {
 		block_list->next = new_block;
 		remaining -= block_size;
 		print_table();
+
 		return;
 	}
 	else{
@@ -173,24 +176,42 @@ void Best_Fit() {
 			old = block_list;
 
 			int current_size = (current->ending)-(current_starting);
+			 			
 			int compare  = (old->block_size)-size;
+			hole_size = current->starting - old->ending;
+
 			
 
-		while((current->next!=NULL)&&(compare>=0)&&(current_size>block_size)&&(compare>current_size)){
+		while((current!=NULL){
+
+			if(hole_size>=block_size)
+			{
+
+			if(hole_size<best_so_far){
+				best_so_far = hole_size;
+				best_block = current;
+				
+			}
 
 
+			}
 			current = current->next;
-
+			old = old->next;
 
 
 		}
 
-			old->next = new_block;
-			new_block->next = current;
+			new_block->next = best_block;
+			old_block->next = new_block;
+
+			new_block->starting = old_block->ending;
+			new_blcok->ending = new_block->starting + block_size;
+
 			new_block->id = block_id;
-			new_block->starting = old->ending;
-			old_ending->ending = new_block->starting+block_size;
-			new_block->next = current
+
+			
+
+			
 			remaing-=block_size;
 			print_table();
 			return;
@@ -199,7 +220,7 @@ void Best_Fit() {
 	}
 
 
-
+/*
 // initialize "current block" to compare hole
 // while not end of list, loop
 //if duplicate id, print message, return
