@@ -61,11 +61,14 @@ void First_Fit() {
         remaining -= block_size;
         print_table();
         return;
-    } else {
+    } 
+    else {
         new_block = (block_type *)malloc(sizeof(block_type));
         current = block_list->next;
         int current_size = (current->ending) - (current->starting);
         int hole_end;
+        int hole_start;
+        int hole_size;
         while (current != NULL) {
             
             if(current->next ==NULL){
@@ -74,8 +77,8 @@ void First_Fit() {
                 else{
                     hole_end = current->next->starting;
                 }
-                int hole_start = current->ending;
-              int   hole_size = hole_end - hole_start;
+                 hole_start = current->ending;
+               hole_size = hole_end - hole_start;
             
             if(current_size >= block_size){
                 
@@ -92,7 +95,7 @@ void First_Fit() {
         else{
             current = current->next;
         }
-        }
+     }
         
     }
 }
@@ -157,28 +160,22 @@ void Best_Fit() {
 void Worst_Fit() {
 
 
-	 int block_size;
+	int block_size;
     int id;
     block_type *new_block;
     block_type *current;
     block_type *best_block;
-    block_type *old;
     int hole_size;
     int best_so_far = pm_size; // to have the best one;
 
-    // prompt for block id & block size
     printf("Size: ");
     scanf("%d", &block_size);
     printf("ID: ");
     scanf("%d", &id);
 
-    // if block size is larger than remaining memory, print message,
     if (block_size >= remaining) {
         printf("Not enough space\n");
-        return;
     }
-
-    // if block list is "empty", allocate new block, set fields for new
     if (block_list->next == NULL) {
         new_block = (block_type *)malloc(sizeof(block_type));
         new_block->block_id = id;
@@ -190,33 +187,29 @@ void Worst_Fit() {
         print_table();
         return;
     } else {
-        // initialize "current block" to compare hole
         new_block = (block_type *)malloc(sizeof(block_type));
+        block_type *old;
         current = block_list->next;
         old = block_list;
-       // int current_size = (current->ending) - (current->starting);
-        //int compare = (old->block_size) - size;
-        hole_size = current->starting - old->ending;
+        
 
         while (current != NULL) {
+        	hole_size = current->starting - old->ending;
             if (hole_size <= block_size) {
                 if (hole_size < best_so_far) {
                     best_so_far = hole_size;
                     best_block = current;
                 }
             }
+            old = current;
             current = current->next;
-            old = old->next;
+           
         }
-
         new_block->next = best_block;
         old->next = new_block;
-
         new_block->starting = old->ending;
         new_block->ending = new_block->starting + block_size;
-
         new_block->block_id = id;
-
         remaining -= block_size;
         print_table();
         return;
@@ -234,7 +227,7 @@ void dealloacate() {
 
 // prompt for block id
 
-	printf("Give a block id\n");
+	printf("Give a block id:");
 	scanf("%d",&id);
 	
 
