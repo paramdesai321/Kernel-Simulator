@@ -275,6 +275,32 @@ void dealloacate() {
 }
 
 
+void defragmentation(){
+
+	block_type *current;
+	block_type *temp;
+	int hole_size, hole_start,hole_end;
+
+
+	current = block_list;
+
+
+	while(current !=null){
+
+		hole_start = current->end;
+		hole_end = current->next->starting;
+		hole_size = hole_end - hole_start;
+		temp = current;
+
+		
+
+	}
+
+
+
+}
+
+
 int main() {
     Enter_Parameter();
     First_Fit();
