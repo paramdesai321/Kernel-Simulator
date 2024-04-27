@@ -61,14 +61,13 @@ void First_Fit() {
         remaining -= block_size;
         print_table();
         return;
-    } 
-    else {
+    } else {
         new_block = (block_type *)malloc(sizeof(block_type));
-        current = block_list->next;
-        int current_size = (current->ending) - (current->starting);
+        current = block_list;
+   
         int hole_end;
-        int hole_start;
         int hole_size;
+        int hole_start;
         while (current != NULL) {
             
             if(current->next ==NULL){
@@ -77,17 +76,17 @@ void First_Fit() {
                 else{
                     hole_end = current->next->starting;
                 }
-                 hole_start = current->ending;
-               hole_size = hole_end - hole_start;
+                hole_start = current->ending;
+                hole_size = hole_end - hole_start;
             
-            if(current_size >= block_size){
+            if(hole_size>= block_size){
                 
-                current->next = new_block;
+                new_block->next = current->next;
                 new_block->block_id = id;
                 new_block->starting = hole_start;
                 new_block->ending = hole_start+block_size;
-                new_block->next = current->next;
-                current->next = new_block;
+                current->next= new_block;
+                
                 remaining -= block_size;
                  print_table();
                  return;
@@ -95,7 +94,7 @@ void First_Fit() {
         else{
             current = current->next;
         }
-     }
+        }
         
     }
 }
@@ -106,7 +105,7 @@ void Best_Fit() {
     block_type *new_block;
     block_type *current;
     block_type *best_block;
-    int hole_size;
+    int hole_size, hole_start, hole_end;
     int best_so_far = pm_size; // to have the best one;
 
     printf("Size: ");
@@ -129,28 +128,37 @@ void Best_Fit() {
         return;
     } else {
         new_block = (block_type *)malloc(sizeof(block_type));
-        block_type *old;
-        current = block_list->next;
-        old = block_list;
-        
-
+        //block_type *old;
+        current = block_list;
+        //old = block_list;
+      
         while (current != NULL) {
-        	hole_size = current->starting - old->ending;
-            if (hole_size >= block_size) {
+            if (current->next == NULL) {
+                hole_end = pm_size;
+            }
+            else{
+                hole_end = current->next->starting;
+            }
+                hole_start = current->ending;
+                hole_size = hole_end - hole_start;
+                  if (hole_size >= block_size) {
                 if (hole_size < best_so_far) {
                     best_so_far = hole_size;
                     best_block = current;
+                    
                 }
             }
-            old = current;
+            //old = current;
             current = current->next;
            
         }
-        new_block->next = best_block;
-        old->next = new_block;
-        new_block->starting = old->ending;
+        
+        new_block->next = best_block->next;
+        //old->next = new_block;
+        new_block->starting = best_block->ending;
         new_block->ending = new_block->starting + block_size;
         new_block->block_id = id;
+        best_block->next = new_block;
         remaining -= block_size;
         print_table();
         return;
@@ -158,15 +166,13 @@ void Best_Fit() {
 }
 
 void Worst_Fit() {
-
-
-	int block_size;
+    int block_size;
     int id;
     block_type *new_block;
     block_type *current;
     block_type *best_block;
-    int hole_size;
-    int best_so_far = pm_size; // to have the best one;
+    int hole_size, hole_start, hole_end;
+    int worst_so_far = 0; // to have the best one;
 
     printf("Size: ");
     scanf("%d", &block_size);
@@ -188,34 +194,41 @@ void Worst_Fit() {
         return;
     } else {
         new_block = (block_type *)malloc(sizeof(block_type));
-        block_type *old;
-        current = block_list->next;
-        old = block_list;
-        
-
+        //block_type *old;
+        current = block_list;
+        //old = block_list;
+      
         while (current != NULL) {
-        	hole_size = current->starting - old->ending;
-            if (hole_size <= block_size) {
-                if (hole_size < best_so_far) {
-                    best_so_far = hole_size;
+            if (current->next == NULL) {
+                hole_end = pm_size;
+            }
+            else{
+                hole_end = current->next->starting;
+            }
+                hole_start = current->ending;
+                hole_size = hole_end - hole_start;
+                  if (hole_size >= block_size) {
+                if (hole_size > worst_so_far) {
+                    worst_so_far = hole_size;
                     best_block = current;
+                    
                 }
             }
-            old = current;
+            //old = current;
             current = current->next;
            
         }
-        new_block->next = best_block;
-        old->next = new_block;
-        new_block->starting = old->ending;
+        
+        new_block->next = best_block->next;
+        //old->next = new_block;
+        new_block->starting = best_block->ending;
         new_block->ending = new_block->starting + block_size;
         new_block->block_id = id;
+        best_block->next = new_block;
         remaining -= block_size;
         print_table();
         return;
     }
-
-
 }
 void dealloacate() {
     // declare/initialize local variables
