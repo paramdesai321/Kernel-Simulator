@@ -306,13 +306,45 @@ void defragmentation(){
 
 
 int main() {
-    Enter_Parameter();
-    First_Fit();
-    First_Fit();
-    dealloacate();
-    Best_Fit();
-    Worst_Fit();
-    defragmentation();
+   
+   int choice;
+
+   printf("Hole-Fitting Algorithms\n");
+   printf("---------------------------\n");
+   printf("1.Enter Parameters\n");
+   printf("2.Allocate memory for block using First-Fit\n");
+   printf("3.Allocate memory for the block using Best-Fit\n");
+   printf("4.Allocate memory for the block using Worst-Fit\n");
+   printf("5.Deallocate memory for the block\n");
+   printf("6.Defrementate Memory\n");
+   printf("7.Quit\n");
+   printf("\n");
+
+   printf("Enter Selection:");
+   scanf("%d",&choice);
+
+   switch(choice){
+
+   case 1:
+   		Enter_Parameter();
+   		break;
+   case 2:
+   		First_Fit();
+   		break;
+   case 3:
+   		Best_Fit();
+   		break;
+   case 4:
+   		Worst_Fit();
+   		break;	
+   case 5:
+   		dealloacate();
+   		break;
+   case 6:
+   		defragmentation();
+   default:
+   		printf("Invalid Selection, please select again");					
+   }
 
     
     return 0;
