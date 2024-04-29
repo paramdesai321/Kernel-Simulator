@@ -12,6 +12,7 @@ struct node {
 typedef struct node block_type;
 int pm_size;
 int remaining;
+int quit=0;
 
 void Enter_Parameter() {
     printf("Size of Physical memory: ");
@@ -304,10 +305,22 @@ void defragmentation(){
 
 }
 
+void Quit(){
+
+	if(node !=NULL){
+		node = NULL;
+	}
+
+	quit=1;
+	return;
+
+}
 
 int main() {
    
    int choice;
+
+   while(quit==0){
 
    printf("Hole-Fitting Algorithms\n");
    printf("---------------------------\n");
@@ -342,10 +355,12 @@ int main() {
    		break;
    case 6:
    		defragmentation();
+   case 7:
+   		Quit();	
    default:
    		printf("Invalid Selection, please select again");					
    }
 
-    
+    }
     return 0;
 }
