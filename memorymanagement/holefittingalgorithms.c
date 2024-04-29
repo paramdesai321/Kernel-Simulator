@@ -279,7 +279,7 @@ void defragmentation(){
 
 	block_type *current;
 	block_type *temp;
-	int hole_size, hole_start,hole_end;
+	int block_size;
 
 
 	current = block_list;
@@ -287,12 +287,16 @@ void defragmentation(){
 
 	while(current !=null){
 
-		hole_start = current->end;
-		hole_end = current->next->starting;
-		hole_size = hole_end - hole_start;
-		temp = current;
+		if(current->next != NULL){
 
-		
+			blocksize = current->next->ending - current->next->starting;
+			current->next->starting = current->ending;
+			current->next->ending = current->next->starting+blocksize;
+		}
+
+		current = current->next;
+
+
 
 	}
 
@@ -308,6 +312,7 @@ int main() {
     dealloacate();
     Best_Fit();
     Worst_Fit();
+    defragmentation();
 
     
     return 0;
