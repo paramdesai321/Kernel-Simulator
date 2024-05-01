@@ -280,7 +280,7 @@ void defragmentation(){
 
 	block_type *current;
 	block_type *temp;
-	int block_size;
+	int blocksize;
 
 
 	current = block_list;
@@ -301,11 +301,12 @@ void defragmentation(){
 
 	}
 
+			print_table();
 
 
 }
 
-void Quit(){
+void Quit(block_type *node){
 
 	if(node ==NULL){
 		return;
@@ -314,7 +315,7 @@ void Quit(){
 		Quit(node->next);
 		free(node);
 	}
-
+    quit=1;
 	return;
 
 }
@@ -358,8 +359,10 @@ int main() {
    		break;
    case 6:
    		defragmentation();
+   		break;
    case 7:
-   		Quit();	
+   		Quit(block_list);	
+   		break;
    default:
    		printf("Invalid Selection, please select again");					
    }
