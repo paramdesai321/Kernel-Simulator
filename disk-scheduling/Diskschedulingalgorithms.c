@@ -4,19 +4,22 @@
 
 // Declare global variables, including dynamic array to store sequence of traversed tracks
 int *sequence = NULL;
+int sequence_size;
 
 /*********************************************************/
 void Enter_Parameters() {
 	// prompt for the sequence size
 	printf("Sequence size:");
-	scanf('%d',&sequence);
+	scanf('%d',&sequence_size);
 	// allocate memory for the sequence of traversed tracks
+	sequence= (int *)malloc((sequence_size+1)*sizeof(int));
+
   return;
 } // "OPTION #1"
 
 
 /*********************************************************/
-void "OPTION #2"() {
+void FIFO() {
 	// declare local variables		
 	// prompt for starting track, store in index 0
 	// prompt for sequence of tracks to seek, store in index 1 to "sequence size"
