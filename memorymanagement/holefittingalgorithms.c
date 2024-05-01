@@ -286,7 +286,7 @@ void defragmentation(){
 	current = block_list;
 
 
-	while(current !=null){
+	while(current !=NULL){
 
 		if(current->next != NULL){
 
@@ -307,11 +307,14 @@ void defragmentation(){
 
 void Quit(){
 
-	if(node !=NULL){
-		node = NULL;
+	if(node ==NULL){
+		return;
+	}
+	else{
+		Quit(node->next);
+		free(node);
 	}
 
-	quit=1;
 	return;
 
 }
