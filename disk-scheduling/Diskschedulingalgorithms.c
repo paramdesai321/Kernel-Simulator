@@ -55,18 +55,54 @@ void FIFO() {
 }
 
 /*********************************************************/
-void "OPTION #3"() {
+void SSTF() {
 	// declare local variables
+
+	int current;
+	int num_traversed=0;
+	int num_done = 0;
+	int shortest_distance;
+	int closest_track;
+	int *done= (int *)calloc(sequence_size,sizeof(int));
+
 	// prompt for starting track, store in index 0
+	...
 	// prompt for sequence of tracks to seek, store in index 1 to "sequence size"
-	// initialize current track and distance traversed to starting track   
+	...
+	// initialize current track and distance traversed to starting track  
+	current = sequence[0]; 
 	// begin printing sequence of traversal 
+	...
 	// until every track is traversed
+	while(num_done<sequence_size){
 		// initilize shortest distance to INT_MAX
+		shortest_distance = INT_MAX;
 		// for each track in sequence
+		for(int i=1;i<sequence_size;i++){
+			if(done[i]==0){
+				if(abs(sequence[i]-current)< shortest_distance){
+										// set current shortest distance and index of the track	w/ shortest distance
+					shortest_distance = abs(sequence[i]-current);
+					closest_track = sequence[i];
+
+
+				}
+			}
+
+		}
+
+		done[closest_track] = 1;
+		num_traversed ++;
+		
+
+
+
+	}
+		
+		
 			// if not already traversed
 				//if distance to traverse is shorter than current shortest distance
-					// set current shortest distance and index of the track	w/ shortest distance
+
 		// set "done" value for track w/shortest distance to 1 (mark as traversed)
 		// increment number of tracks that have been traversed
 		// update total distance traversed
