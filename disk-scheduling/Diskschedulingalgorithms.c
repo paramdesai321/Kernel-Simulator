@@ -10,7 +10,7 @@ int sequence_size;
 void Enter_Parameters() {
 	// prompt for the sequence size
 	printf("Sequence size:");
-	scanf('%d',&sequence_size);
+	scanf("%d",&sequence_size);
 	// allocate memory for the sequence of traversed tracks
 	sequence= (int *)malloc((sequence_size+1)*sizeof(int));
 
@@ -20,15 +20,39 @@ void Enter_Parameters() {
 
 /*********************************************************/
 void FIFO() {
-	// declare local variables		
-	// prompt for starting track, store in index 0
+	// declare local variables
+	// prompt for starting track, store in index 0	
+	int num_traversed =0; // the counter 
+
+
+	
 	// prompt for sequence of tracks to seek, store in index 1 to "sequence size"
+	printf("Starting track:");
+	scanf("%d",&sequence[0]);
+
+	for(int i=0;i<=sequence_size;i++){
+		scanf("..");
+
+
+	}
+	printf("Traversed Sequence from track %d:",sequence[0]);
+
+
 	// calculate total distance of traversed tracks
+	for(int i=0;i<sequence_size;i++){
+		num_traversed += abs(sequence[i]-sequence[i-1];
+			printf("%d",...);
+
+	}		
+
+	
 	// print sequence of traversal
+
+	printf()
 	// print total distance of tracks traversed
 	return;
-} // "OPTION #2"	
-
+// "OPTION #2"	
+}
 
 /*********************************************************/
 void "OPTION #3"() {
