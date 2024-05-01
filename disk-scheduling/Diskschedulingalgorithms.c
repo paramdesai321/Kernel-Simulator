@@ -3,11 +3,13 @@
 #include <limits.h>
 
 // Declare global variables, including dynamic array to store sequence of traversed tracks
-
+int *sequence = NULL;
 
 /*********************************************************/
-void "OPTION #1"() {
+void Enter_Parameters() {
 	// prompt for the sequence size
+	printf("Sequence size:");
+	scanf('%d',&sequence);
 	// allocate memory for the sequence of traversed tracks
   return;
 } // "OPTION #1"
