@@ -78,6 +78,9 @@ void FIFO() {
 	int min_index;
 	int current_cycle=0;
 	// for each process, reset "done" field to 0 
+	for(int i=0;i<n;i++){
+		table[i].done =0;
+	}
 
 	// while there are still processes to schedule 	
 	while(num_done < n){
@@ -117,51 +120,46 @@ void FIFO() {
 
 //*************************************************************
 void SJF() {
-	// declare (and initilize when appropriate) local variables
-	int lowest_cycle;
-	int current_cycle=0; 
-	int min_index;
-	int at_least_one;
-	int num_done=0;
-	// for each process, reset "done" field to 0 
-	// while there are still processes to schedule 	
-	while(num_done<n){
-		// initilize the lowest total cycle time to INT_MAX (largest integer value) 
-		lowest_cycle = INT_MAX;
-		at_least_one = 0;
+    int lowest_cycle;
+    int current_cycle = 0;
+    int min_index;
+    int at_least_one;
+    int num_done = 0;
 
-		// for each process not yet scheduled 
-			for(int i=0;i<n;i++){
-			// check if process has lower total cycle time than current lowest and has arrival time less than current cycle time and update 
-			if((table[i].total_cpu<lowest_cycle)&&(table[i].arrival<=current_cycle))	{
-				lowest_cycle = table[i].total_cpu;
-				min_index = i;	
-				at_least_one = 1;
-			}
+    for (int i = 0; i < n; i++) {
+        table[i].done = 0;
+    }
 
-	}
+    while (num_done < n) {
+        lowest_cycle = INT_MAX;
+        at_least_one = 0;
 
-		// set start time, end time, turnaround time, done fields for unscheduled process with lowest (and available) total cycle time
-		if(at_least_one==1){
-			table[min_index].start_time=max(table[min_index].arrival,current_cycle);
-			//printf('%d',table[min_index].start_time);
-		table[min_index].end_time=table[min_index].start_time+table[min_index].total_cpu;  	
-		table[min_index].turnaround_time = table[min_index].end_time - table[min_index].arrival; 
-			// update current cycle time and increment number of processes scheduled 
-			current_cycle = table[min_index].end_time;
-			table[min_index].done =1;
-			num_done++;
+        for (int i = 0; i < n; i++) {
+            if (!table[i].done && table[i].arrival <= current_cycle) {
+                if (table[i].total_cpu < lowest_cycle) {
+                    lowest_cycle = table[i].total_cpu;
+                    min_index = i;
+                    at_least_one = 1;
+                }
+            }
+        }
 
-		}   
-		else{
-			current_cycle++;
-		}    
-	} 	
-	// while ends here	
-	// print contents of table 
-	printBatch();
-	return;		
-}	
+        if (at_least_one == 1) {
+            table[min_index].start_time = max(table[min_index].arrival, current_cycle);
+            table[min_index].end_time = table[min_index].start_time + table[min_index].total_cpu;
+            table[min_index].turnaround_time = table[min_index].end_time - table[min_index].arrival;
+            current_cycle = table[min_index].end_time;
+            table[min_index].done = 1;
+            num_done++;
+        } else {
+            current_cycle++; // Move this line outside the if-else block
+        }
+    }
+    
+    printBatch();
+    return;
+}
+
         	
 
 //*************************************************************
@@ -213,11 +211,11 @@ void SRT() {
 				num_done++;
 
 			}
-			current_cycle++;
+			
 			
 		}   
 			
-		     	
+		     	current_cycle++;
 	}	
 	// print contents of table 
 	printBatch();
@@ -248,7 +246,7 @@ int main() {
 		printf("2.Schedule Processes with FIFO Algorithm\n");
 		printf("3.Schedule Processes with SJF Algorithm\n");
 		printf("4.Schedule Processes with SRT Algorithm\n");
-		printf("Quit Program and free memory\n");
+		printf("5.Quit Program and free memory\n");
 
 		// prompt for menu selection 
 		printf("Choose: ");

@@ -55,71 +55,90 @@ void FIFO() {
 }
 
 /*********************************************************/
-void SSTF() {
+// Shortest Seek Time First
+void sstf() {
 	// declare local variables
-
-	int current;
-	int num_traversed=0;
-	int num_done = 0;
-	int shortest_distance;
-	int closest_track;
-	int *done= (int *)calloc(sequence_size,sizeof(int));
+    int current;
+    int num_traversed = 0;
+    int num_done = 0;
+    int shortest_distance;
+    int *done = (int *)calloc(sequence_size, sizeof(int)); // Allocates and clears all to 0
+    int closest_track;
 
 	// prompt for starting track, store in index 0
-	...
+    printf("\nEnter starting track");
+    printf("%d", &sequence[0]);
+
 	// prompt for sequence of tracks to seek, store in index 1 to "sequence size"
-	...
-	// initialize current track and distance traversed to starting track  
-	current = sequence[0]; 
+    printf("\nEnter sequence of tracks to seek");
+	for (int i = 1; i <= sequence_size; i++)
+    {
+        scanf("%d", &sequence[i]);
+    }
+
+	// initialize current track and distance traversed to starting track   
+    current = sequence[0];
+    
 	// begin printing sequence of traversal 
-	...
+    printf("Traversed Sequence from track %d: ", sequence[0]);
+
 	// until every track is traversed
-	while(num_done<sequence_size){
+    while(num_done < sequence_size)
+    {
 		// initilize shortest distance to INT_MAX
-		shortest_distance = INT_MAX;
+        shortest_distance = INT_MAX;
+
 		// for each track in sequence
-		for(int i=1;i<sequence_size;i++){
-			if(done[i]==0){
-				if(abs(sequence[i]-current)< shortest_distance){
-										// set current shortest distance and index of the track	w/ shortest distance
-					shortest_distance = abs(sequence[i]-current);
-					closest_track = sequence[i];
-
-
-				}
-			}
-
-		}
-
-		done[closest_track] = 1;
-		num_traversed ++;
-		
-
-
-
-	}
-		
-		
+        for(int i = 1; i <= sequence_size; i++)
+        {
 			// if not already traversed
+            if(done[i] == 0)
+            {
 				//if distance to traverse is shorter than current shortest distance
-
+                if(abs(sequence[i] - current) < shortest_distance)
+                {
+					// set current shortest distance and index of the track	w/ shortest distance
+                    shortest_distance = abs(sequence[i] - current);
+                    closest_track = sequence[i];
+                }
+            }
+        }
 		// set "done" value for track w/shortest distance to 1 (mark as traversed)
+        done[closest_track] = 1;
+
 		// increment number of tracks that have been traversed
+        num_done ++;
+
 		// update total distance traversed
+        num_traversed += shortest_distance;
+
 		//set current track to new position, print position
+        current = closest_track;
+        
+        printf("%d",&closest_track);
+    }
   	// print total distance traversed
+    printf("%d", &num_traversed);
+
 	return;
 
 } // "OPTION #3" 
 
 
+
 /*********************************************************/
-void "OPTION #4"() {
+void scan() {
 
 	// declare local variables
+	int num_traversed = 0;
+
 	// prompt for starting track, store in index 0
+	 printf("\nEnter starting track");
+    printf("%d", &sequence[0]);
+
 	// prompt for sequence of tracks to seek, store in index 1 to "sequence size"
 	//prompt for initial direction (0=descreasing, 1=increasing)
+	printf("Provide the Initial ")
 	// initialize current track and distance traversed to starting track
 	// begin printing sequence of traversal 
 	// until every track is traversed
@@ -127,6 +146,13 @@ void "OPTION #4"() {
 		// for each track in sequence
 			// if not already traversed
 				//if distance to traverse is shorter than current shortest distance in the current direction
+		if(abs(sequence[i]-current)< shortest_distance){
+				if((sequence[i] >current) && (direction==1)){
+
+					
+				}
+
+		}
 					// set current shortest distance and index of the track	w/ shortest distance
      					// set flag that at least one track was traversed
 		// if at least one track was traversed
