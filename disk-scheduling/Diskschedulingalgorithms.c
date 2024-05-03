@@ -183,14 +183,15 @@ void scan() {
 		
 		
  	// print total distance traversed
-			
+
 	return;
 } // "OPTION #4"
 
 
 /*********************************************************/
-void "OPTION #5"() {
+void c_scan() {
 	// declare local variables
+	int end_reached = 0;
 	// prompt for starting track, store in index 0
 	// prompt for sequence of tracks to seek, store in index 1 to "sequence size"
 	// initialize current track and number traversed to starting track
@@ -200,20 +201,58 @@ void "OPTION #5"() {
 		// for each track in sequence
 			// if not already traversed
 				//if distance to traverse is shorter than current shortest distance and a positive value (only increasing direction)
+			if(((sequence[i]-current)<shortest_distance)&& (sequence[i]>current)){
+
 					// set current shortest distance and index of the track	w/ shortest distance
      					// set flag that at least one track was traversed
+				at_least_one =1;
+
+			} // if shorter distance and upward direction 
+			
+			}// for
+
+
 		// if at least one track was traversed
+			if(at_least_one==1){
+
     			// set "done" value for track w/shortest distance to 1 (mark as traversed)
-			// increment number of tracks that have been traversed
-			// if largest track was reached
-				// update total distance traversed by derementing by distance to track (subtracts distance from 0 to track)
-				// reset "largest track" flag
-			// else
+    			// increment number of tracks that have been traversed
+    			// if largest track was reached
+    			if(end_reached==1){
+
+    					// update total distance traversed by derementing by distance to track (subtracts distance from 0 to track)
+    				num_traversed -= shortest_distance;
+    				// reset "largest track" flag
+    				end_reached = 0;
+
+    			}
+			}
+			else{// else
 				// update total distance traversed by distance to track
 			//set current track to new position, print position
-		// else (no track was traversed)
-			// update total distance by current track (adds remaining distance before going back to 0)
+
+
+			}
+			// else (no track was traversed)
+			else{ // the else for the at_least_one is 0
+
+					// update total distance by current track (adds remaining distance before going back to 0)
+				num_traversed  += current;
+
 			// reset current track to 0 (loop back around)
+				current = 0;
+				end_reached = 1;
+
+
+			}
+			
+			
+				
+				
+			
+				
+		
+			
 			// set "end reached" flag to 1
  	// print total distance traversed
 	return;    
