@@ -20,7 +20,7 @@ void Enter_Parameters() {
 
 
 /*********************************************************/
-/*
+
 void FIFO() {
 	// declare local variables
 	// prompt for starting track, store in index 0	
@@ -33,24 +33,27 @@ void FIFO() {
 	scanf("%d",&sequence[0]);
 
 	for(int i=0;i<=sequence_size;i++){
-		scanf("..");
+		scanf("%d",&sequence[i]);
 
 
 	}
-	printf("Traversed Sequence from track %d:",sequence[0]);
+
+	printf("Traverse Sequence from track %d:",sequence[0]);
 
 
-	// calculate total distance of traversed tracks
-	for(int i=0;i<sequence_size;i++){
-		num_traversed += abs(sequence[i]-sequence[i-1];
-			printf("%d",...);
+	
+	for(int i=1;i<sequence_size;i++){
+		// calculate total distance of traversed tracks
+		num_traversed += abs(sequence[i]-sequence[i-1]);
+		// print sequence of traversal
+			printf("%d",sequence[i]);
 
 	}		
 
 	
-	// print sequence of traversal
+	
 
-	printf()
+	printf("The distance of the traversed trackes from track %d:%d",sequence[0],num_traversed);
 	// print total distance of tracks traversed
 	return;
 // "OPTION #2"	
