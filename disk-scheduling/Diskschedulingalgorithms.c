@@ -18,7 +18,9 @@ void Enter_Parameters() {
 } // "OPTION #1"
 
 
+
 /*********************************************************/
+/*
 void FIFO() {
 	// declare local variables
 	// prompt for starting track, store in index 0	
@@ -54,7 +56,7 @@ void FIFO() {
 // "OPTION #2"	
 }
 
-/*********************************************************/
+
 // Shortest Seek Time First
 void sstf() {
 	// declare local variables
@@ -126,7 +128,6 @@ void sstf() {
 
 
 
-/*********************************************************/
 void scan() {
 
 	// declare local variables
@@ -188,7 +189,7 @@ void scan() {
 } // "OPTION #4"
 
 
-/*********************************************************/
+
 void c_scan() {
 	// declare local variables
 	int end_reached = 0;
@@ -234,7 +235,7 @@ void c_scan() {
 
 			}
 			// else (no track was traversed)
-			else{ // the else for the at_least_one is 0
+			else{ // the else for the at_least_one is 0 
 
 					// update total distance by current track (adds remaining distance before going back to 0)
 				num_traversed  += current;
@@ -259,7 +260,7 @@ void c_scan() {
 } // "OPTION #5
 
 
-/***************************************************************/
+
 void "OPTION #6"() {
 	// if sequence is not NULL, free sequence
 	return;
@@ -272,6 +273,7 @@ int main() {
 	// while user has not chosen to quit
 		// print menu of options
 		// prompt for menu selection
+	Enter_Parameters();
 		// call appropriate procedure based on choice--use switch statement or series of if, else if, else statements
 	return 1; // indicates success
 } // main	
