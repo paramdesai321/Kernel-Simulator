@@ -25,6 +25,7 @@ void FIFO() {
 	// declare local variables
 	// prompt for starting track, store in index 0	
 	int num_traversed =0; // the counter 
+	int start_track;
 
 
 	
@@ -32,7 +33,7 @@ void FIFO() {
 	printf("Starting track:");
 	scanf("%d",&sequence[0]);
 
-	for(int i=0;i<=sequence_size;i++){
+	for(int i=1;i<=sequence_size;i++){
 		scanf("%d",&sequence[i]);
 
 
@@ -42,7 +43,7 @@ void FIFO() {
 
 
 	
-	for(int i=1;i<sequence_size;i++){
+	for(int i=1;i<=sequence_size;i++){
 		// calculate total distance of traversed tracks
 		num_traversed += abs(sequence[i]-sequence[i-1]);
 		// print sequence of traversal
@@ -61,6 +62,7 @@ void FIFO() {
 
 
 // Shortest Seek Time First
+/*
 void sstf() {
 	// declare local variables
     int current;
@@ -277,6 +279,7 @@ int main() {
 		// print menu of options
 		// prompt for menu selection
 	Enter_Parameters();
+	FIFO();
 		// call appropriate procedure based on choice--use switch statement or series of if, else if, else statements
 	return 1; // indicates success
 } // main	
