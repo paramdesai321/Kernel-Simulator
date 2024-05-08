@@ -145,10 +145,12 @@ void scan() {
 	int closest_track;
 	int direction;
 	int current;
+	int num_done =0;
+	int *done = (int *)calloc(sequence_size, sizeof(int)); // Allocates and clears all to 0
 
 	// prompt for starting track, store in index 0
 	 printf("\nEnter starting track");
-    printf("%d", &sequence[0]);
+    scanf("%d", &sequence[0]);
 
 	// prompt for sequence of tracks to seek, store in index 1 to "sequence size"
 
@@ -162,13 +164,14 @@ void scan() {
 	scanf("%d",&direction);
 	// initialize current track and distance traversed to starting track
 	current = sequence[0];
-	shortest_distance = INT_MAX;
+	
 	// begin printing sequence of traversal 
 	printf("Traversed Sequence from track %d: ", sequence[0]);
 
 	// until every track is traversed
 	while(num_done < sequence_size){
 		at_least_one=0;
+		shortest_distance = INT_MAX;
 		// initilize shortest distance to INT_MAX
 		// for each track in sequence
 		for(int i=1;i<=sequence_size;i++){
@@ -193,20 +196,22 @@ void scan() {
 			if(at_least_one==1){
 				// if at least one track was traversed
     			// set "done" value for track w/shortest distance to 1 (mark as traversed)
-    			done[closest_track] = 1;
-
+    			
 			// increment number of traversed tracks
     			num_traversed  += shortest_distance;
 			// update total distance traversed
 
 			//set current track to new position, print position
+			num_done++;
     			current = sequence[closest_track];
-    			printf("%d",current);
+    			done[current] = 1;
+                printf("%d ",current);
 
 			}
 			else{ // else change direction
 				direction = 1-direction; // change the direction
 			}
+			
 
 			}	
      					
@@ -303,8 +308,8 @@ int main() {
 		// print menu of options
 		// prompt for menu selection
 	Enter_Parameters();
-	FIFO();
-	sstf();
+	
+	scan();
 		// call appropriate procedure based on choice--use switch statement or series of if, else if, else statements
 	return 1; // indicates success
 } // main	
