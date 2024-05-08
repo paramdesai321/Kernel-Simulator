@@ -13,6 +13,7 @@ void Enter_Parameters() {
 	scanf("%d",&sequence_size);
 	// allocate memory for the sequence of traversed tracks
 	sequence= (int *)malloc((sequence_size+1)*sizeof(int));
+	
 
   return;
 } // "OPTION #1"
@@ -62,7 +63,7 @@ void FIFO() {
 
 
 // Shortest Seek Time First
-/*
+
 void sstf() {
 	// declare local variables
     int current;
@@ -74,7 +75,7 @@ void sstf() {
 
 	// prompt for starting track, store in index 0
     printf("\nEnter starting track");
-    printf("%d", &sequence[0]);
+    scanf("%d", &sequence[0]);
 
 	// prompt for sequence of tracks to seek, store in index 1 to "sequence size"
     printf("\nEnter sequence of tracks to seek");
@@ -105,8 +106,10 @@ void sstf() {
                 if(abs(sequence[i] - current) < shortest_distance)
                 {
 					// set current shortest distance and index of the track	w/ shortest distance
+
                     shortest_distance = abs(sequence[i] - current);
-                    closest_track = sequence[i];
+                   
+                    closest_track = i;
                 }
             }
         }
@@ -120,19 +123,19 @@ void sstf() {
         num_traversed += shortest_distance;
 
 		//set current track to new position, print position
-        current = closest_track;
         
-        printf("%d",&closest_track);
+        current = sequence[closest_track];
+        printf("%d ",current);
     }
   	// print total distance traversed
-    printf("%d", &num_traversed);
+  	printf("\n");
+    printf("The num of track traversed%d ", num_traversed);
 
 	return;
 
 } // "OPTION #3" 
 
-
-
+/*
 void scan() {
 
 	// declare local variables
@@ -280,6 +283,7 @@ int main() {
 		// prompt for menu selection
 	Enter_Parameters();
 	FIFO();
+	sstf();
 		// call appropriate procedure based on choice--use switch statement or series of if, else if, else statements
 	return 1; // indicates success
 } // main	
