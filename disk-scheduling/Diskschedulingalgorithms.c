@@ -135,7 +135,7 @@ void sstf() {
 
 } // "OPTION #3" 
 
-/*
+
 void scan() {
 
 	// declare local variables
@@ -143,28 +143,43 @@ void scan() {
 	int at_least_one;
 	int shortest_distance;
 	int closest_track;
+	int direction;
+	int current;
 
 	// prompt for starting track, store in index 0
 	 printf("\nEnter starting track");
     printf("%d", &sequence[0]);
 
 	// prompt for sequence of tracks to seek, store in index 1 to "sequence size"
+
+	 printf("\nEnter sequence of tracks to seek");
+	for (int i = 1; i <= sequence_size; i++)
+    {
+        scanf("%d", &sequence[i]);
+    }
 	//prompt for initial direction (0=descreasing, 1=increasing)
-	printf("Provide the Initial ")
+	printf("Provide the Initial direction:");
+	scanf("%d",&direction);
 	// initialize current track and distance traversed to starting track
+	current = sequence[0];
+	shortest_distance = INT_MAX;
 	// begin printing sequence of traversal 
+	printf("Traversed Sequence from track %d: ", sequence[0]);
+
 	// until every track is traversed
 	while(num_done < sequence_size){
 		at_least_one=0;
 		// initilize shortest distance to INT_MAX
 		// for each track in sequence
+		for(int i=1;i<=sequence_size;i++){
 			// if not already traversed
 				//if distance to traverse is shorter than current shortest distance in the current direction
+		
 		if(abs(sequence[i]-current)< shortest_distance){
 				if(((sequence[i] >current) && (direction==1))||((sequence[i]<current)&&(direction==0))){
 					// set current shortest distance and index of the track	w/ shortest distance
 					shortest_distance = abs(current-sequence[i]);
-					closest_track = sequence[i];
+					closest_track = i;
 					// set flag that at least one track was traversed
 					at_least_one = 1;
 
@@ -172,15 +187,21 @@ void scan() {
 				}
 
 		}//for
+			} 		
 
 			// if at least one track was traversed
 			if(at_least_one==1){
 				// if at least one track was traversed
     			// set "done" value for track w/shortest distance to 1 (mark as traversed)
-			// increment number of traversed tracks
-			// update total distance traversed
-			//set current track to new position, print position
+    			done[closest_track] = 1;
 
+			// increment number of traversed tracks
+    			num_traversed  += shortest_distance;
+			// update total distance traversed
+
+			//set current track to new position, print position
+    			current = sequence[closest_track];
+    			printf("%d",current);
 
 			}
 			else{ // else change direction
@@ -197,7 +218,7 @@ void scan() {
 } // "OPTION #4"
 
 
-
+/*
 void c_scan() {
 	// declare local variables
 	int end_reached = 0;
