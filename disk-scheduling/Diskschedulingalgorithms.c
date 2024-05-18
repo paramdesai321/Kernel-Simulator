@@ -5,7 +5,7 @@
 // Declare global variables, including dynamic array to store sequence of traversed tracks
 int *sequence = NULL;
 int sequence_size;
-
+int quit =0;
 /*********************************************************/
 void Enter_Parameters() {
 	// prompt for the sequence size
@@ -107,7 +107,7 @@ void sstf() {
                 {
 					// set current shortest distance and index of the track	w/ shortest distance
 
-                    shortest_distance = abs(sequence[i] - current);
+                   shortest_distance = abs(sequence[i] - current);
                    
                     closest_track = i;
                 }
@@ -154,6 +154,7 @@ void scan() {
 
 	// prompt for sequence of tracks to seek, store in index 1 to "sequence size"
 
+
 	 printf("\nEnter sequence of tracks to seek");
 	for (int i = 1; i <= sequence_size; i++)
     {
@@ -177,7 +178,7 @@ void scan() {
 		for(int i=1;i<=sequence_size;i++){
 			// if not already traversed
 				//if distance to traverse is shorter than current shortest distance in the current direction
-		
+		if(done[i]==0){
 		if(abs(sequence[i]-current)< shortest_distance){
 				if(((sequence[i] >current) && (direction==1))||((sequence[i]<current)&&(direction==0))){
 					// set current shortest distance and index of the track	w/ shortest distance
@@ -189,6 +190,8 @@ void scan() {
 
 				}
 
+    		}
+		
 		}//for
 			} 		
 
@@ -204,7 +207,7 @@ void scan() {
 			//set current track to new position, print position
 			num_done++;
     			current = sequence[closest_track];
-    			done[current] = 1;
+    			done[closest_track] = 1;
                 printf("%d ",current);
 
 			}
@@ -223,70 +226,107 @@ void scan() {
 } // "OPTION #4"
 
 
-/*
+
 void c_scan() {
 	// declare local variables
 	int end_reached = 0;
+	int num_traversed = 0;
+	int at_least_one;
+	int shortest_distance;
+	int closest_track;
+	int direction;
+	int current;
+	int num_done =0;
+	int *done = (int *)calloc(sequence_size, sizeof(int)); // Allocates and clears all to 0
 	// prompt for starting track, store in index 0
-	// prompt for sequence of tracks to seek, store in index 1 to "sequence size"
+	// prompt for sequence of tracks to seek, store in
+	 printf("\nEnter starting track");
+    scanf("%d", &sequence[0]);
+
+
+    for (int i = 1; i <= sequence_size; i++)
+    {
+        scanf("%d", &sequence[i]);
+    }
+
 	// initialize current track and number traversed to starting track
+	
+	current = sequence[0];
+
 	// begin printing sequence of traversal 
 	// until every track is traversed
+	while(num_done < sequence_size){
 		// initilize shortest distance to INT_MAX
+		shortest_distance= INT_MAX;
+		at_least_one=0;
 		// for each track in sequence
+
+		for(int i=1;i<=sequence_size;i++){
 			// if not already traversed
+			if(done[i]==0){
 				//if distance to traverse is shorter than current shortest distance and a positive value (only increasing direction)
+			
 			if(((sequence[i]-current)<shortest_distance)&& (sequence[i]>current)){
 
 					// set current shortest distance and index of the track	w/ shortest distance
+				closest_track =i;
+				shortest_distance = sequence[i]-current;
      					// set flag that at least one track was traversed
 				at_least_one =1;
 
 			} // if shorter distance and upward direction 
 			
-			}// for
-
+			// for
+		}
+		}
 
 		// if at least one track was traversed
 			if(at_least_one==1){
 
     			// set "done" value for track w/shortest distance to 1 (mark as traversed)
+    			done[closest_track] =1;
     			// increment number of tracks that have been traversed
+    			num_done++;
     			// if largest track was reached
     			if(end_reached==1){
 
     					// update total distance traversed by derementing by distance to track (subtracts distance from 0 to track)
     				num_traversed -= shortest_distance;
+    				
     				// reset "largest track" flag
     				end_reached = 0;
 
     			}
-			}
+			
 			else{// else
 				// update total distance traversed by distance to track
-			//set current track to new position, print position
 
+			//set current track to new position, print position
+				num_traversed += shortest_distance;
+				}
+				current = sequence[closest_track];
+				printf("%d ",current);
 
 			}
+			
 			// else (no track was traversed)
 			else{ // the else for the at_least_one is 0 
-
+				
 					// update total distance by current track (adds remaining distance before going back to 0)
-				num_traversed  += current;
-
-			// reset current track to 0 (loop back around)
-				current = 0;
 				end_reached = 1;
+				num_traversed  += current;
+        		current = 0;
 
-
+                
+			// reset current track to 0 (loop back around)
+			
 			}
 			
 			
 				
+		}		
+			printf("Traversed: %d",num_traversed);
 				
-			
-				
-		
 			
 			// set "end reached" flag to 1
  	// print total distance traversed
@@ -295,6 +335,8 @@ void c_scan() {
 
 
 
+
+/*
 void "OPTION #6"() {
 	// if sequence is not NULL, free sequence
 	return;
@@ -307,9 +349,49 @@ int main() {
 	// while user has not chosen to quit
 		// print menu of options
 		// prompt for menu selection
-	Enter_Parameters();
+	int choice;
+
+	while(quit!=0){
+
+		printf("1)Enter Parameter\n");
+		printf("2)Calculate distance to traverse tracks using FIFO\n");
+		printf("3) Calculate distance to traverse tracks using SSTF\n");
+		printf("4) Calculate distance to traverse tracks using Scan\n");
+		printf("5) Calculate distance to traverse tracks using C-Scan\n");
+		printf("6) Quit program and free memory\n");
+		printf("Enter Selection: ");
+		scanf("%d",&choice);
+
+
+		swtich(choice){
+
+		case 1:
+			Enter_Parameters();
+			break;
+		case 2:
+			FIFO();
+			break;
+		case 3:
+			sstf();
+			break;
+		case 4:
+			scan();
+			break;
+		case 5:
+			c_scan();
+			break;
+		case 6:
+			quit();
+		default:
+			printf("Invalid Input, select again\n");
+
+		case 8: 
+
+		}
+	}
 	
-	scan();
-		// call appropriate procedure based on choice--use switch statement or series of if, else if, else statements
+
+
+			// call appropriate procedure based on choice--use switch statement or series of if, else if, else statements
 	return 1; // indicates success
 } // main	
