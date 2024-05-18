@@ -28,11 +28,14 @@ void FIFO() {
 	int num_traversed =0; // the counter 
 	int start_track;
 
-
+    
 	
 	// prompt for sequence of tracks to seek, store in index 1 to "sequence size"
+	
 	printf("Starting track:");
 	scanf("%d",&sequence[0]);
+	
+	printf("Enter the sequence of tracks to seek: ");
 
 	for(int i=1;i<=sequence_size;i++){
 		scanf("%d",&sequence[i]);
@@ -48,14 +51,14 @@ void FIFO() {
 		// calculate total distance of traversed tracks
 		num_traversed += abs(sequence[i]-sequence[i-1]);
 		// print sequence of traversal
-			printf("%d",sequence[i]);
+			printf("%d ",sequence[i]);
 
 	}		
 
 	
-	
+	printf("\n");
 
-	printf("The distance of the traversed trackes from track %d:%d",sequence[0],num_traversed);
+	printf("The distance of the traversed trackes from track %d:%d\n",sequence[0],num_traversed);
 	// print total distance of tracks traversed
 	return;
 // "OPTION #2"	
@@ -74,11 +77,11 @@ void sstf() {
     int closest_track;
 
 	// prompt for starting track, store in index 0
-    printf("\nEnter starting track");
+    printf("\nEnter starting track: ");
     scanf("%d", &sequence[0]);
 
 	// prompt for sequence of tracks to seek, store in index 1 to "sequence size"
-    printf("\nEnter sequence of tracks to seek");
+    printf("\nEnter sequence of tracks to seek:");
 	for (int i = 1; i <= sequence_size; i++)
     {
         scanf("%d", &sequence[i]);
@@ -129,7 +132,7 @@ void sstf() {
     }
   	// print total distance traversed
   	printf("\n");
-    printf("The num of track traversed%d ", num_traversed);
+    printf("The num of track traversed:%d \n", num_traversed);
 
 	return;
 
@@ -149,18 +152,19 @@ void scan() {
 	int *done = (int *)calloc(sequence_size, sizeof(int)); // Allocates and clears all to 0
 
 	// prompt for starting track, store in index 0
-	 printf("\nEnter starting track");
+	 printf("\nEnter starting track: ");
     scanf("%d", &sequence[0]);
 
 	// prompt for sequence of tracks to seek, store in index 1 to "sequence size"
 
 
-	 printf("\nEnter sequence of tracks to seek");
+	 printf("\nEnter sequence of tracks to seek: ");
 	for (int i = 1; i <= sequence_size; i++)
     {
         scanf("%d", &sequence[i]);
     }
 	//prompt for initial direction (0=descreasing, 1=increasing)
+	printf("\n");
 	printf("Provide the Initial direction:");
 	scanf("%d",&direction);
 	// initialize current track and distance traversed to starting track
@@ -221,6 +225,8 @@ void scan() {
 		
 		
  	// print total distance traversed
+ 		printf("\n");
+    printf("The num of track traversed:%d \n", num_traversed);
 
 	return;
 } // "OPTION #4"
@@ -240,9 +246,10 @@ void c_scan() {
 	int *done = (int *)calloc(sequence_size, sizeof(int)); // Allocates and clears all to 0
 	// prompt for starting track, store in index 0
 	// prompt for sequence of tracks to seek, store in
-	 printf("\nEnter starting track");
+	 printf("\nEnter starting track: ");
     scanf("%d", &sequence[0]);
-
+    
+    printf("Enter the sequence of tracks to seek starting from track %d:",sequence[0]);
 
     for (int i = 1; i <= sequence_size; i++)
     {
@@ -254,6 +261,7 @@ void c_scan() {
 	current = sequence[0];
 
 	// begin printing sequence of traversal 
+		printf("Traversed Sequence from track %d: ", sequence[0]);
 	// until every track is traversed
 	while(num_done < sequence_size){
 		// initilize shortest distance to INT_MAX
@@ -324,8 +332,9 @@ void c_scan() {
 			
 			
 				
-		}		
-			printf("Traversed: %d",num_traversed);
+		}	
+		printf("\n");
+			printf("The num of track traversed: %d\n",num_traversed);
 				
 			
 			// set "end reached" flag to 1
@@ -336,11 +345,22 @@ void c_scan() {
 
 
 
-/*
-void "OPTION #6"() {
-	// if sequence is not NULL, free sequence
-	return;
-} // "OPTION #6
+
+void Quit(){
+    
+    
+    if(sequence != NULL){
+        free(sequence);
+        sequence = NULL;
+        
+        
+        
+    }
+    quit=1;
+    printf("bye");
+    return;
+    
+}
 
 
 /***************************************************************/
@@ -351,7 +371,7 @@ int main() {
 		// prompt for menu selection
 	int choice;
 
-	while(quit!=0){
+	while(quit==0){
 
 		printf("1)Enter Parameter\n");
 		printf("2)Calculate distance to traverse tracks using FIFO\n");
@@ -363,7 +383,7 @@ int main() {
 		scanf("%d",&choice);
 
 
-		swtich(choice){
+		switch(choice){
 
 		case 1:
 			Enter_Parameters();
@@ -381,11 +401,12 @@ int main() {
 			c_scan();
 			break;
 		case 6:
-			quit();
+			Quit();
+			break;
 		default:
 			printf("Invalid Input, select again\n");
 
-		case 8: 
+	
 
 		}
 	}
