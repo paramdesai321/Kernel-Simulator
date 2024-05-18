@@ -67,6 +67,7 @@ void parameters() {
 	    table[i].id=i;
 	}
 	  // print contents of table 
+	  printBatch();
 	return;	  
 }
 
@@ -164,75 +165,85 @@ void SJF() {
 
 //*************************************************************
 void SRT() {
-	// declare (and initilize when appropriate) local variables
-	int lowest_remaining;
-	int current_cycle=0; 
-	int min_index;
-	int at_least_one;
-	int num_done = 0;
+// declare (and initilize when appropriate) local variables 
+int num_done = 0;
+int earliest_time;
+int min_index;
+int current_cycle = 0;
 
-	for(int i=0;i<n;i++){
-		table[i].done = 0;
-		table[i].already_started = 0;
-		table[i].total_remaining = table[i].total_cpu;
-		
-	}
-	// for each process, reset "done" field to 0 
-	// while there are still processes to schedule 	
-	while(num_done<n){
-		// initilize the lowest total cycle time to INT_MAX (largest integer value) 
-		lowest_remaining = INT_MAX;
-		at_least_one = 0;
+int lowest_remaining; //Lowest Remaining
+int at_least_one = 0;
 
-		// for each process not yet scheduled 
-		for(int i=0;i<n;i++){
-			// check if process has lower total cycle time than current lowest and has arrival time less than current cycle time and update 
-			if((table[i].total_remaining < lowest_remaining)&&(table[i].arrival<= current_cycle))	{
-				lowest_remaining = table[i].total_remaining;
-				min_index = i;
-				at_least_one = 1;
-			}
+// for each process, reset "done", "total_remaining" and "already_started" fields to 0 
 
-		}
+for(int i = 0; i < n; i++)
+{
+table[i].done = 0; 
+table[i].already_started = 0;
+table[i].total_remaining = table[i].total_cpu;
+}
 
-		// set start time, end time, turnaround time, done fields for unscheduled process with lowest (and available) total cycle time
-		if(at_least_one==1){
-			if(table[min_index].already_started ==0){
-				table[min_index].start_time = max(table[min_index].arrival,current_cycle);
-				table[min_index].already_started =1;
-			}
-			
-			table[min_index].end_time = current_cycle+1;
-			table[min_index].turnaround_time = table[min_index].end_time-table[min_index].arrival;
-			table[min_index].total_remaining--;
-			// update current cycle time and increment number of processes scheduled 
-			if(table[min_index].total_remaining ==0){
-				table[min_index].done =1;
-				num_done++;
+// For each process not yet scheduled
+// while there are still processes to schedule 
+while(num_done < n)
+{
+// initilize the lowest remaining time to INT_MAX (largest integer value)
+lowest_remaining = INT_MAX; 
+// for each process not yet scheduled 
+for(int i = 0; i < n; i++)
+{
+// check if process has lower total remaining time than current lowest and has arrival time less than current cycle time and update
+if( (table[i].total_remaining < lowest_remaining) && (table[i].arrival <= current_cycle) && (table[i].done != 1) )
+{
+lowest_remaining = table[i].total_remaining;
 
-			}
-			
-			
-		}   
-			
-		     	current_cycle++;
-	}	
-	// print contents of table 
-	printBatch();
-	return;		
-}	
-        	
+min_index = i;
+at_least_one = 1;
+}
 
-//*************************************************************
+
+}
+
+// set start time, end time, turnaround time, done fields for unscheduled process with earliest arrival time        
+if(at_least_one == 1)
+{
+// If it is the processes first time starting
+if(table[min_index].already_started == 0)
+{
+table[min_index].start_time = max(table[min_index].arrival, current_cycle);
+}
+
+table[min_index].end_time = current_cycle + 1; // End of this current cycle
+table[min_index].turnaround_time = table[min_index].end_time - table[min_index].arrival;
+table[min_index].total_remaining--;
+table[min_index].already_started = 1;
+
+if(table[min_index].total_remaining == 0)
+{
+table[min_index].done = 1;
+num_done++;
+}
+
+}
+
+current_cycle++;
+}
+
+// print contents of table 
+printBatch();
+
+return;
+}
+    //*************************************************************
 void memoryfree() {
 	// free the schedule table if not NULL 
 	if(table != NULL){
 	free(table);	
 	}
 	quit=1;
+	printf("Bye!!\n");
 	return;
 }
-
 
 //*************************************************************
 int main() {
