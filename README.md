@@ -11,7 +11,7 @@ The OS keeps track of each process using a **process control block (PCB)**: A da
 I have created a Process control block in C, that schedules process using 3 algorithms: **First in First out(FIFO)**, **Shortest Job First(SJF)** and **Shortest Remaining Time(SRT)**. 
 
 Directions to code : 
-``` cd/ProcessControlBlock/PCB.c 
+``` cd/ProcessControlBlock/PCB.c ```
 
 
 
