@@ -106,5 +106,7 @@ Disk scheduling is done by operating systems to schedule I/O requests arriving f
 4. Circular Scan(C-Scan)
 
 
+**A special thanks to Dr. Robert McIlhenny of California State University, Northridge for designing the skeleton structure of these programs.**
+
 
 
