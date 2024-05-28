@@ -93,8 +93,16 @@ cd/memorymanagement/holefittingalgorithms.c
 
 **NOTE**: These algorithms are only designed for a Magnetic Disk, and would not work for the state-of-the-art Solid State Drives, beacuse they do not have moving parts.
 
+##  Disk Scheduling / IO Scheduling
+
+Disk scheduling is done by operating systems to schedule I/O requests arriving for the disk. Multiple I/O requests may arrive by different processes and only one I/O request can be served at a time by the disk controller. Thus other I/O requests need to wait in the waiting queue and need to be scheduled.
 
 
+I have used to four disk scheduling in the program:
+1. First-in-first-out (FIFO)
+2. Shortest seek time first (SSTF)
+3. Scan
+4. Circular Scan(C-Scan)
 
 
 
