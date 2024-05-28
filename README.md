@@ -8,7 +8,7 @@ A **process** is an instance of a program being executed by an OS.
 
 The OS keeps track of each process using a **process control block (PCB)**: A data structure that holds information for a process, including the current instruction address, the execution stack, the set of resources used by the process, and the program being executed. The PCB is the concrete representation of a process.
 
-Functions included in my Process Control Block:
+### Functions included in my Process Control Block:
 --------------------------------
 1) Enter parameters
 2) Create a new child process
@@ -26,7 +26,7 @@ A **batch** process performs a long-running and generally repetitive task that d
 
 I have used 3 algorithms to schedule a batch process:  **First in First out(FIFO)**, **Shortest Job First(SJF)** and **Shortest Remaining Time(SRT)**.
 
-Functions included for Batch Scheduling
+### Functions included for Batch Scheduling
 ----------------
 1) Enter parameters
 2) Schedule processes with FIFO algorithm
@@ -49,7 +49,7 @@ Banker's Algorithm is one of the most famous algorithms to resolve deadlock, the
 2. Execute a graph reduction on the new state s'. (Claim edges are treated as request edges.)
 3. If the graph of state s' is completely reducible then accept s' as the new state. Otherwise disallow the acquisition by reverting to state s.
 
-Furthermore my program includes the following option for resolving deadlock using Banker's Algorithm:
+### Furthermore my program includes the following option for resolving deadlock using Banker's Algorithm:
 ------------------------------------------------------------------------------------------------------
 1) Enter resource claim graph data
 2) Request resource by a process
@@ -76,7 +76,7 @@ Additionally, there are one more approaches that I have used to manage the memor
 
 Lastly, there is a **Deallocation** feature that removes or deletes the memory allocation of a process.
 
-List of feature in the program:
+### List of feature in the program:
 -------------------------------
 1) Enter parameters
 2) Allocate memory for block using First-fit
@@ -98,7 +98,8 @@ cd/memorymanagement/holefittingalgorithms.c
 Disk scheduling is done by operating systems to schedule I/O requests arriving for the disk. Multiple I/O requests may arrive by different processes and only one I/O request can be served at a time by the disk controller. Thus other I/O requests need to wait in the waiting queue and need to be scheduled.
 
 
-I have used to four disk scheduling in the program:
+### I have used to four disk scheduling in the program:
+---------------------------------------------------
 1. First-in-first-out (FIFO)
 2. Shortest seek time first (SSTF)
 3. Scan
