@@ -18,7 +18,6 @@ The OS keeps track of each process using a **process control block (PCB)**: A da
 Directions to code : 
 ```
 cd/ProcessControlBlock/PCB.c
-
 ```
 ## Batch Scheduling 
 
@@ -104,6 +103,11 @@ Disk scheduling is done by operating systems to schedule I/O requests arriving f
 2. Shortest seek time first (SSTF)
 3. Scan
 4. Circular Scan(C-Scan)
+
+Directions to code : 
+```
+cd/disk-scheduling/Diskschedulingalgorithms.c
+```
 
 
 **A special thanks to Dr. Robert McIlhenny of California State University, Northridge for designing the skeleton structure of these programs.**
